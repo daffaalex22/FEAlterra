@@ -49,46 +49,52 @@ console.log(b);
 console.log(c);
 
 // FUNCTION TO RETURN ARRAY VALUE
-function ReturnArray(array) {
-    var res = '['
-    for (let i = 0; i < array.length; i++) {
-        if (i == array.length - 1) {
-            res = res + array[i] + ']'
-        }
-        else {
-            res = res + array[i] + ', '
-        }
-    }
+// function ReturnArray(array) {
+//     var res = '['
+//     for (let i = 0; i < array.length; i++) {
+//         if (i == array.length - 1) {
+//             res = res + array[i] + ']'
+//         }
+//         else {
+//             res = res + array[i] + ', '
+//         }
+//     }
 
-    console.log(res)
-}
+//     console.log(res)
+// }
 
 
 // NOMOR 4
 let bdays = ['10-17', '05-19', '20-19'];
+bdays = bdays.map(x => x.replace(/-/g, '/'));
+console.log(bdays);
 
 // Changing the dash to a forward slash
-for (let i = 0; i < bdays.length; i++) {
-    bdays[i] = bdays[i].replace(/-/g, '/')
-}
+// for (let i = 0; i < bdays.length; i++) {
+//     bdays[i] = bdays[i].replace(/-/g, '/')
+// }
 
-// Calling each element of bdays
-ReturnArray(bdays)
+// ReturnArray(bdays)
 
 // NOMOR 5
 let value = [1, 2, 3, 4, 5, 6];
+value = value.map(x => x * 2);
+console.log(value);
 
-for (let i = 0; i < value.length; i++) {
-    value[i] = value[i] * 2;
-}
+// for (let i = 0; i < value.length; i++) {
+//     value[i] = value[i] * 2;
+// }
 
-ReturnArray(value)
+// ReturnArray(value)
 
 // NOMOR 6
 let arr = [1.5, 2.56, 5.1, 12.33];
+arr = arr.map(x => Math.ceil(x));
+console.log(arr);
 
-for (let i = 0; i < arr.length; i++) {
-    arr[i] = Math.ceil(arr[i]);
-}
+// for (let i = 0; i < arr.length; i++) {
+//     arr[i] = Math.ceil(arr[i]);
+// }
 
-ReturnArray(arr)
+
+// ReturnArray(arr)
