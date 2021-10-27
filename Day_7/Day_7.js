@@ -59,7 +59,6 @@ console.log(c);
 //             res = res + array[i] + ', '
 //         }
 //     }
-
 //     console.log(res)
 // }
 
@@ -73,7 +72,6 @@ console.log(bdays);
 // for (let i = 0; i < bdays.length; i++) {
 //     bdays[i] = bdays[i].replace(/-/g, '/')
 // }
-
 // ReturnArray(bdays)
 
 // NOMOR 5
@@ -84,7 +82,6 @@ console.log(value);
 // for (let i = 0; i < value.length; i++) {
 //     value[i] = value[i] * 2;
 // }
-
 // ReturnArray(value)
 
 // NOMOR 6
@@ -95,6 +92,4 @@ console.log(arr);
 // for (let i = 0; i < arr.length; i++) {
 //     arr[i] = Math.ceil(arr[i]);
 // }
-
-
 // ReturnArray(arr)
