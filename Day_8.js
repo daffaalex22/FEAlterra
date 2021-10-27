@@ -12,15 +12,10 @@ console.log("sum    : " + nilai2)
 
 console.log("=============================== no2 ===============================")
 var filterValue = [-4, 3, 2, -21, 1];
-let res = [];
 
-function positiveNumber(number) {
-    if (number > 0) {
-        return number
-    }
-}
-
-filterValue = filterValue.filter(positiveNumber)
+filterValue = filterValue.filter((item) => {
+    return item > 0
+})
 console.log(filterValue)
 
 console.log("=============================== no3 ===============================")
