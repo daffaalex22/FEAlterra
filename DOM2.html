@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <title>Tugas Anchor DOM!</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row p-4">
+            <div class="col-12">
+                <h1 class="fw-bold text-center">Registration Form</h1>
+            </div>
+        </div>
+        <div class="row justify-content-center bg-danger rounded p-4">
+            <div class="col-6">
+                <form action="#" id="main-form">
+                    <div class="form-group">
+                        <label for='username' class="fw-bold text-white">Username :</label><br>
+                        <input type="text" id="username" name="username" class="col-12">
+                    </div>
+
+                    <div class="form-group">
+                        <label for='password' class="fw-bold text-white">Password :</label><br>
+                        <input type="password" id="password" name="password" class="col-12">
+                    </div>
+
+                    <div class="form-group">
+                        <label for='confirmpassword' class="fw-bold text-white">Confirm Password :</label><br>
+                        <input type="password" id="confirmpassword" name="confirmpassword" class="col-12">
+                    </div>
+                    <div class="form-group">
+                        <label for='email' class="fw-bold text-white">Email :</label><br>
+                        <input type="email" id="email" name="email" class="col-12">
+                    </div>
+
+                    <div class="form-group">
+                        <label for='confirmemail' class="fw-bold text-white">Confirm Email:</label><br>
+                        <input type="email" id="confirmemail" name="confirmemail" class="col-12"><br>
+                    </div>
+                    <button type="submit" class="btn btn-light mt-2 w-100" onclick="validate()">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="No_5_DOM2.js"></script>
+</body>
+
+</html>
