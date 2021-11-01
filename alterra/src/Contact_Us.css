@@ -1,0 +1,55 @@
+.contactUs {
+    color: #19345E;
+    font-family: Roboto, sans-serif;
+    margin: 0;
+    height: 61vmax;
+}
+
+h3 {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 28px;
+}
+
+label {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+}
+
+#IMG {
+    height: 61vh;
+    width: 41vw;
+}
+
+#FORM {
+    background-color: white;
+    background-size: 50vw;
+    width: 50vw;
+    height: 61vw;
+    padding-top: 12vh;
+    padding-left: 8.5vmax;
+}
+
+#SUB {
+    width: 96px;
+    height: 40px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    background-color: #F47522;
+    border-color: #F47522;
+}
+
+#ALTA {
+    opacity: 0.65;
+    left: 8vw;
+    top: 24vw;
+    width: 24vw
+}
+
+#BT {
+    height: 61.5vw;
+    width: 41vw;
+    opacity: 0.65;
+}

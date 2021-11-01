@@ -1,0 +1,48 @@
+.home {
+    color: #19345E;
+    font-family: Roboto, sans-serif;
+  }
+  
+  h1 {
+    font-weight: bold;
+    font-size: 7.3vw;
+  }
+  
+  h3 {
+    font-size: 3vw;
+  }
+  
+  h5 {
+    font-size: 2.2vw;
+    /* margin-top: 220px; */
+  }
+  
+  h3,
+  h5 {
+    font-weight: 500;
+  }
+  
+  #GIT {
+    background-color: #F47522;
+    border-color: #F47522;
+    font-size: 1.04vw;
+  }
+  
+  #HOME {
+    color: #F47522;
+  }
+  
+  #BG {
+    background-image: url('./img/bg-img.png');
+    padding-left: 98px;
+    padding-top: 184px;
+    border-radius: 9px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100vw;
+    height: 70vw;
+  }
+  
+  #PART {
+    height: 30vw;
+  }
