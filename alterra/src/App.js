@@ -1,6 +1,6 @@
 import './App.css';
 import Home from './Home';
-import ContactUs from './Contact_Us';
+import ContactUs from './ContactUs';
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
