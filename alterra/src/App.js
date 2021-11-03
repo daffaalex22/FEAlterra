@@ -1,6 +1,12 @@
+// STYLING
 import './App.css';
-import Home from './Home';
-import ContactUs from './ContactUs';
+
+//PAGES
+import Home from './pages/Home';
+import ContactUs from './pages/ContactUs';
+import Todo from './pages/Todo';
+
+//STUFF FROM REACT
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
@@ -8,7 +14,7 @@ function App() {
   return (
 
     <div className="App">
-      <BrowserRouter>
+      {/* <BrowserRouter>
         <Switch>
           <Route exact path='/'>
             <Home />
@@ -17,7 +23,8 @@ function App() {
             <ContactUs />
           </Route>
         </Switch>
-      </BrowserRouter>
+      </BrowserRouter> */}
+      <Todo />
     </div>
   );
 }

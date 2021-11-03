@@ -1,0 +1,9 @@
+.todo {
+    padding: 5% 10% 20% 10%;
+}
+
+.todo h2 {
+    font-weight: bold;
+    border-bottom: 1px solid black;
+    padding-bottom: 25px;
+}

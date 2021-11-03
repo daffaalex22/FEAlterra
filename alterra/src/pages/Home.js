@@ -1,7 +1,7 @@
-import logoAlta from './img/logo-ALTA.png';
-import myAva from './img/matthew-hamilton-tNCH0sKSZbA-unsplash.jpg';
-import './Home.css';
-import { Link } from 'react-router-dom';
+import logoAlta from '../img/logo-ALTA.png';
+import myAva from '../img/matthew-hamilton-tNCH0sKSZbA-unsplash.jpg';
+import '../Home.css';
+// import { Link } from 'react-router-dom';
 
 const Home = () => {
     return (

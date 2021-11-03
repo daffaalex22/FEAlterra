@@ -1,0 +1,16 @@
+* {
+    padding-left: 15px;
+}
+
+.list .completed {
+    text-decoration: line-through black 1.5px;
+}
+
+.list button {
+    margin: 10px;
+    font-weight: 600;
+    padding: 5px 20px;
+    display: inline-block;
+    border: 2px solid black;
+    border-radius: 20px;
+}
