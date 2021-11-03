@@ -1,6 +1,6 @@
 import { useState } from "react";
-import List from "../components/List";
-import '../Todo.css'
+import List from "../../components/List/List";
+import './Todo.css'
 
 const Todo = () => {
     const [list, setList] = useState([

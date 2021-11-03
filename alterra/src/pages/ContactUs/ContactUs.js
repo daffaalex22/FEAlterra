@@ -1,7 +1,7 @@
-import '../ContactUs.css'
-import logoAlta from '../img/logo-ALTA-v2@2x.png'
-import workingPeople from '../img/charles-rRWiVQzLm7k-unsplash.jpg'
-import darkBlue from '../img/birutua.png'
+import './ContactUs.css'
+import logoAlta from '../../img/logo-ALTA-v2@2x.png'
+import workingPeople from '../../img/charles-rRWiVQzLm7k-unsplash.jpg'
+import darkBlue from '../../img/birutua.png'
 
 const ContactUs = () => {
     return (

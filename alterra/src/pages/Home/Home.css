@@ -33,7 +33,7 @@
   }
   
   #BG {
-    background-image: url('./img/bg-img.png');
+    background-image: url('../../img/bg-img.png');
     padding-left: 98px;
     padding-top: 184px;
     border-radius: 9px;

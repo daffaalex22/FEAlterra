@@ -2,9 +2,9 @@
 import './App.css';
 
 //PAGES
-import Home from './pages/Home';
-import ContactUs from './pages/ContactUs';
-import Todo from './pages/Todo';
+import Home from './pages/Home/Home';
+import ContactUs from './pages/ContactUs/ContactUs';
+import Todo from './pages/Todo/Todo';
 
 //STUFF FROM REACT
 import React from 'react';

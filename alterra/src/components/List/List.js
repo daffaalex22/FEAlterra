@@ -1,4 +1,4 @@
-import '../List.css'
+import './List.css'
 
 const List = (props) => {
     const list = props.list;
