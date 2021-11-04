@@ -5,6 +5,7 @@ import './App.css';
 import Home from './pages/Home/Home';
 import ContactUs from './pages/ContactUs/ContactUs';
 import Todo from './pages/Todo/Todo';
+import TodoClass from './pages/Todo/TodoClass';
 
 //STUFF FROM REACT
 import React from 'react';
@@ -14,18 +15,9 @@ function App() {
   return (
 
     <div className="App">
-      {/* <BrowserRouter>
-        <Switch>
-          <Route exact path='/'>
-            <Home />
-          </Route>
-          <Route exact path="/ContactUs">
-            <ContactUs />
-          </Route>
-        </Switch>
-      </BrowserRouter> */}
-      <Todo />
-    </div>
+      {/* <Todo /> */}
+      <TodoClass />
+    </div >
   );
 }
 
