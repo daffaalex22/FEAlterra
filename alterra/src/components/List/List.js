@@ -1,17 +1,33 @@
 import './List.css'
+import { FaEdit, FaTrash } from 'react-icons/fa'
 
 const List = (props) => {
     const list = props.list;
+    // const handleDelete = props.handleDelete;
+
 
     return (
-        list.map((item) => (
-            <div className="list" key={item.id}>
-                {item.completed ?
-                    <button className="completed">{item.title}</button> :
-                    <button className="incompleted">{item.title}</button>
+        <div className="list">
+            <ul className="list-group w-25 m-auto">
+                {
+                    list.map((item) => (
+                        <li className="list-group-item" key={item.id}>
+                            <p className="title">{item.title}</p>
+                            <div className="btn-container">
+                                <button type="button" className="edit-btn">
+                                    <FaEdit />
+                                </button>
+                                <button type="button" className="delete-btn" onClick={() => props.deleteItem(item.id)}>
+                                    <FaTrash />
+                                </button>
+                            </div>
+                        </li>
+                    ))
                 }
-            </div>
-        ))
+            </ul>
+        </div >
+        // <h2>The todo list</h2>
+        // <div>List</div>
     );
 }
 

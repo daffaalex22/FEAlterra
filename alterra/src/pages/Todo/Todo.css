@@ -1,9 +1,17 @@
 .todo {
     padding: 5% 10% 20% 10%;
+    text-align: center;
+    /* background-color: ; */
 }
 
 .todo h2 {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: xxx-large;
     font-weight: bold;
     border-bottom: 1px solid black;
     padding-bottom: 25px;
+    background: linear-gradient(to right, #F0D671 0%, #75FA73 100%);
+    background-clip: padding-box;
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
 }
