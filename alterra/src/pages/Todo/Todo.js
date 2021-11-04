@@ -38,6 +38,30 @@ const Todo = () => {
         }
         else if (name && isEditing) {
             // deal with edit
+            setAlert({
+                show: true,
+                msg: 'Edited Item',
+                type: 'success'
+            })
+
+            clearTimeout();
+            setTimeout(
+                function () {
+                    setAlert({
+                        show: false,
+                        msg: ''
+                    })
+                }
+                , 2500);
+
+            list.map((item) => {
+                if (editID == item.id) {
+                    item.title = name;
+                    return item
+                }
+                return item
+            })
+            setName('')
         }
         else {
             //display alert
@@ -74,7 +98,7 @@ const Todo = () => {
         setAlert({
             show: true,
             msg: 'Deleted Item',
-            type: 'Danger'
+            type: 'danger'
         })
         setTimeout(
             function () {
@@ -89,6 +113,13 @@ const Todo = () => {
                 return item
             }
         }))
+    }
+
+    const handleEdit = (id) => {
+        const specificItem = list.find((item) => item.id == id);
+        setIsEditing(true);
+        seteditID(id);
+        setName(specificItem.title);
     }
 
     return (
@@ -115,19 +146,12 @@ const Todo = () => {
 
             {list.length > 0 &&
                 <div>
-                    <List list={list} deleteItem={handleDelete} />
+                    <List list={list} deleteItem={handleDelete} editItem={handleEdit} />
                     <button className="clear-btn" onClick={handleClear}>
                         Clear All
                     </button>
                 </div>
             }
-
-            {/* <div className="todo">
-                <h2>To Do App</h2>
-                <br />
-                <Input />
-                <List list={list} />
-            </div> */}
         </div>
 
     )

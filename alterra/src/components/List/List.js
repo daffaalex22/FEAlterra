@@ -14,7 +14,7 @@ const List = (props) => {
                         <li className="list-group-item" key={item.id}>
                             <p className="title">{item.title}</p>
                             <div className="btn-container">
-                                <button type="button" className="edit-btn">
+                                <button type="button" className="edit-btn" onClick={() => props.editItem(item.id)}>
                                     <FaEdit />
                                 </button>
                                 <button type="button" className="delete-btn" onClick={() => props.deleteItem(item.id)}>
