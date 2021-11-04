@@ -8,11 +8,11 @@ const List = (props) => {
 
     return (
         <div className="list">
-            <ul className="container-fluid list-group w-50 m-auto mt-3">
+            <ul className="container-fluid list-group w-50 m-auto mt-3 align-content-lg-start">
                 {
                     list.map((item) => (
                         <li className="list-group-item" key={item.id}>
-                            <div className="d-inline-block justify-content-start">
+                            <div className="d-inline-block">
                                 <button type="button" className="edit-btn" onClick={() => props.editItem(item.id)}>
                                     <FaEdit />
                                 </button>
@@ -20,9 +20,9 @@ const List = (props) => {
                                     <FaTrash />
                                 </button>
                             </div>
-                            <span className="title">
+                            <p className="title">
                                 {item.title}
-                            </span>
+                            </p>
                         </li>
                     ))
                 }
