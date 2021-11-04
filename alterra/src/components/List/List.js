@@ -12,15 +12,18 @@ const List = (props) => {
                 {
                     list.map((item) => (
                         <li className="list-group-item" key={item.id}>
-                            <p className="title">{item.title}</p>
-                            <div className="btn-container">
-                                <button type="button" className="edit-btn" onClick={() => props.editItem(item.id)}>
-                                    <FaEdit />
-                                </button>
-                                <button type="button" className="delete-btn" onClick={() => props.deleteItem(item.id)}>
-                                    <FaTrash />
-                                </button>
-                            </div>
+                            <p className="title d-inline-block">
+                                {item.title}
+                                <div className="btn-container">
+                                    <button type="button" className="edit-btn d-inline-block" onClick={() => props.editItem(item.id)}>
+                                        <FaEdit />
+                                    </button>
+                                    <button type="button" className="delete-btn d-inline-block" onClick={() => props.deleteItem(item.id)}>
+                                        <FaTrash />
+                                    </button>
+                                </div>
+                            </p>
+
                         </li>
                     ))
                 }

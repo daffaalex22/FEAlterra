@@ -125,11 +125,11 @@ const Todo = () => {
     return (
         <div className="todo">
             <form action="" className="todo-form" onSubmit={handleSubmit}>
-                <h3>Todo List MF!</h3>
+                <h3>Todos</h3>
                 {alert.show &&
-                    <Alert msg={alert.msg} />
+                    <Alert msg={alert.msg} type={alert.type} />
                 }
-                <div className="form-control">
+                <div className="form-control w-50 m-auto">
                     <input
                         type="text"
                         className="todo-input"
@@ -141,9 +141,9 @@ const Todo = () => {
                     <button type="submit" className="submit-btn">
                         {isEditing ? 'edit' : 'submit'}
                     </button>
+
                 </div>
             </form>
-
             {list.length > 0 &&
                 <div>
                     <List list={list} deleteItem={handleDelete} editItem={handleEdit} />
@@ -152,6 +152,7 @@ const Todo = () => {
                     </button>
                 </div>
             }
+
         </div>
 
     )

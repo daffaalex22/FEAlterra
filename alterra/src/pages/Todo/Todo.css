@@ -15,3 +15,26 @@
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
 }
+
+.todo-form h3 {
+    color: var(--clr-primary-1);
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+.form-control {
+    display: flex;
+    justify-content: center;
+  }
+
+.todo-input {
+    padding: 0.25rem;
+    padding-left: 1rem;
+    background: gray;
+    border-top-left-radius: 0.25rem;
+    border-bottom-left-radius: 0.25rem;
+    border-color: transparent;
+    font-size: 1rem;
+    flex: 1 0 auto;
+    color: gray;
+    margin: 5px;
+  }

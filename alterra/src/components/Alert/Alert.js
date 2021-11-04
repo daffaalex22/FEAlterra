@@ -1,6 +1,8 @@
-const Alert = ({ msg }) => {
+import './Alert.css'
+
+const Alert = ({ msg, type }) => {
     return (
-        <div>{msg}</div>
+        <div className="alert-${type}"> {msg}</div >
     );
 }
 
