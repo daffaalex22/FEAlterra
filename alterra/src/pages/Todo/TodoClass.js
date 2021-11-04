@@ -46,7 +46,7 @@ export default class TodoClass extends Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        console.log('handleSubmit Started');
+        // console.log('handleSubmit Started');
         if (this.state.name === "") {
             this.showAlert('The field is still empty', 'danger');
             this.hideAlert();
