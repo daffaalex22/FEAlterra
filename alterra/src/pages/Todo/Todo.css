@@ -1,40 +1,89 @@
 .todo {
-    padding: 5% 10% 20% 10%;
+    margin-top: 15vh;
+    padding: 3% 3% 5% 3%;
     text-align: center;
-    /* background-color: ; */
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    /* filter: drop-shadow(30px 10px 4px pink); */
+    box-shadow: 5px 5px lightgray;
+    background-color: whitesmoke;
 }
 
-.todo h2 {
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    font-size: xxx-large;
-    font-weight: bold;
-    border-bottom: 1px solid black;
-    padding-bottom: 25px;
-    background: linear-gradient(to right, #F0D671 0%, #75FA73 100%);
-    background-clip: padding-box;
-	-webkit-background-clip: text;
-	-webkit-text-fill-color: transparent;
+.todo::hover {
+    box-shadow: 5px 10px;
 }
 
 .todo-form h3 {
-    color: var(--clr-primary-1);
+    font-weight: bolder;
+    font-size: 50px;
+    font-family: cursive;
+    color: black;
     margin-bottom: 1.5rem;
     text-align: center;
+    background: linear-gradient(to right, #79c3b4 45%, #75FA73 55%);
+    background-clip: padding-box;
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
   }
 .form-control {
     display: flex;
     justify-content: center;
+    border-radius: 50px;
+    border-color: #75FA73;
   }
 
 .todo-input {
-    padding: 0.25rem;
+    width: 1em;
+    padding: 0.2rem;
     padding-left: 1rem;
-    background: gray;
-    border-top-left-radius: 0.25rem;
-    border-bottom-left-radius: 0.25rem;
+    background: white;
+    border-top-left-radius: 1rem;
+    border-bottom-left-radius: 1rem;
     border-color: transparent;
     font-size: 1rem;
     flex: 1 0 auto;
-    color: gray;
+    color: black;
     margin: 5px;
+    font-style: italic;
   }
+
+.submit-btn {
+    background: #75FA73;
+    border-color: transparent;
+    flex: 0 0 5rem;
+    display: grid;
+    align-items: center;
+    padding: 0.25rem;
+    text-transform: capitalize;
+    letter-spacing: 1px;
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    cursor: pointer;
+    content: #75FA73;
+    transition: all 0.3s linear;
+    font-size: 0.85rem;
+  }
+
+.submit-btn:hover {
+    font-weight: 600;
+    background: #79c3b4;
+    color: white;
+}
+
+.todo div .clear-btn {
+    margin-top: 0.75em;
+    border: 0;
+    border-radius: 5px;
+    padding: 0.25rem 0.75rem;
+    background-color: red;
+    letter-spacing: 1px;
+    font-size: 0.85rem;
+    transition: all 0.3s linear;
+    cursor: pointer;
+}
+
+.clear-btn:hover {
+    font-weight: 600;
+    background: red;
+    color: whitesmoke;
+}

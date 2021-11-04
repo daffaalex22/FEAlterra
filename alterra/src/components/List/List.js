@@ -8,22 +8,21 @@ const List = (props) => {
 
     return (
         <div className="list">
-            <ul className="list-group w-25 m-auto">
+            <ul className="container-fluid list-group w-50 m-auto mt-3">
                 {
                     list.map((item) => (
                         <li className="list-group-item" key={item.id}>
-                            <p className="title d-inline-block">
+                            <div className="d-inline-block justify-content-start">
+                                <button type="button" className="edit-btn" onClick={() => props.editItem(item.id)}>
+                                    <FaEdit />
+                                </button>
+                                <button type="button" className="delete-btn" onClick={() => props.deleteItem(item.id)}>
+                                    <FaTrash />
+                                </button>
+                            </div>
+                            <span className="title">
                                 {item.title}
-                                <div className="btn-container">
-                                    <button type="button" className="edit-btn d-inline-block" onClick={() => props.editItem(item.id)}>
-                                        <FaEdit />
-                                    </button>
-                                    <button type="button" className="delete-btn d-inline-block" onClick={() => props.deleteItem(item.id)}>
-                                        <FaTrash />
-                                    </button>
-                                </div>
-                            </p>
-
+                            </span>
                         </li>
                     ))
                 }

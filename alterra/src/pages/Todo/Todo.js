@@ -5,12 +5,7 @@ import Alert from "../../components/Alert/Alert";
 import './Todo.css'
 
 const Todo = () => {
-    const [list, setList] = useState([
-        // { id: 1, title: "Membuat Komponen", completed: true, },
-        // { id: 2, title: "Unit Testing", completed: false, },
-        // { id: 3, title: "Setup Development Environment", completed: true, },
-        // { id: 4, title: "Deploy ke server", completed: false, },
-    ]);
+    const [list, setList] = useState([]);
     const [name, setName] = useState('');
     const [isEditing, setIsEditing] = useState(false);
     const [editID, seteditID] = useState(null);
@@ -62,6 +57,7 @@ const Todo = () => {
                 return item
             })
             setName('')
+            setIsEditing(false)
         }
         else {
             //display alert
@@ -123,12 +119,13 @@ const Todo = () => {
     }
 
     return (
-        <div className="todo">
+        <div className="todo container w-75">
             <form action="" className="todo-form" onSubmit={handleSubmit}>
                 <h3>Todos</h3>
                 {alert.show &&
                     <Alert msg={alert.msg} type={alert.type} />
                 }
+                <br />
                 <div className="form-control w-50 m-auto">
                     <input
                         type="text"
