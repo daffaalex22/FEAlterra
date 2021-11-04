@@ -78,7 +78,8 @@ const Todo = () => {
             //deal with add items
             const newItem = {
                 id: new Date().getTime().toString(),
-                title: name
+                title: name,
+                status: false
             };
             setList([...list, newItem]);
             setName('')
@@ -118,15 +119,38 @@ const Todo = () => {
         setName(specificItem.title);
     }
 
+    const handleCheck = (id) => {
+        setAlert({
+            show: true,
+            msg: 'Checked Out Item',
+            type: 'danger'
+        })
+        setTimeout(
+            function () {
+                setAlert({
+                    show: false,
+                    msg: ''
+                })
+            }
+            , 2500);
+        list.map((item) => {
+            if (item.id == id) {
+                item.status = true
+                return item
+            }
+            return item
+        });
+    }
+
     return (
-        <div className="todo container w-75">
+        <div className="todo container w-50">
             <form action="" className="todo-form" onSubmit={handleSubmit}>
                 <h3>Todos</h3>
                 {alert.show &&
                     <Alert msg={alert.msg} type={alert.type} />
                 }
                 <br />
-                <div className="form-control w-50 m-auto">
+                <div className="form-control w-75 m-auto">
                     <input
                         type="text"
                         className="todo-input"
@@ -143,7 +167,7 @@ const Todo = () => {
             </form>
             {list.length > 0 &&
                 <div>
-                    <List list={list} deleteItem={handleDelete} editItem={handleEdit} />
+                    <List list={list} deleteItem={handleDelete} editItem={handleEdit} checkItem={handleCheck} />
                     <button className="clear-btn" onClick={handleClear}>
                         Clear All
                     </button>

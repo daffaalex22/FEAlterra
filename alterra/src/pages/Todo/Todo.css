@@ -1,5 +1,6 @@
 .todo {
     margin-top: 15vh;
+    margin-bottom: 15vh;
     padding: 3% 3% 5% 3%;
     text-align: center;
     border: 1px solid lightgray;
@@ -34,8 +35,13 @@
 
 .todo-input {
     width: 1em;
+    height: 2.25em;
     padding: 0.2rem;
     padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin: 0 5px 0 5px;
     background: white;
     border-top-left-radius: 1rem;
     border-bottom-left-radius: 1rem;
@@ -43,7 +49,7 @@
     font-size: 1rem;
     flex: 1 0 auto;
     color: black;
-    margin: 5px;
+    /* margin: 5px; */
     font-style: italic;
   }
 
@@ -56,8 +62,8 @@
     padding: 0.25rem;
     text-transform: capitalize;
     letter-spacing: 1px;
-    border-top-right-radius: 1rem;
-    border-bottom-right-radius: 1rem;
+    border-top-right-radius: 1.3rem;
+    border-bottom-right-radius: 1.3rem;
     cursor: pointer;
     content: #75FA73;
     transition: all 0.3s linear;
