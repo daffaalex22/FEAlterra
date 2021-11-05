@@ -1,13 +1,12 @@
 .todo {
-    margin-top: 15vh;
-    margin-bottom: 15vh;
+    margin-top: 15vh auto;
     padding: 3% 3% 5% 3%;
     text-align: center;
     border: 1px solid lightgray;
     border-radius: 5px;
     /* filter: drop-shadow(30px 10px 4px pink); */
     box-shadow: 5px 5px lightgray;
-    background-color: whitesmoke;
+    background-color: white;
 }
 
 .todo::hover {
@@ -26,6 +25,8 @@
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
   }
+
+
 .form-control {
     display: flex;
     justify-content: center;

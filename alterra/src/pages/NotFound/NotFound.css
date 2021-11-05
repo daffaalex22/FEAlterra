@@ -1,0 +1,35 @@
+.todo {
+    margin-top: 15vh;
+    margin-bottom: 10vh;
+    padding: 3% 3% 5% 3%;
+    text-align: center;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    box-shadow: 5px 5px lightgray;
+    background-color: white;
+}
+
+.no-data {
+    letter-spacing: 2px;
+    font-size: xx-large;
+    font-family: cursive;
+    font-weight: bolder;
+    margin-bottom: 5vh;
+    background-clip: padding-box;
+    background: linear-gradient(to right, #79c3b4 45%, #75FA73 55%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.btn {
+    margin-top: 3vh;
+    color: #79c3b4;
+    border-color: #79c3b4;
+}
+
+.btn:hover {
+    font-weight: 450;
+    transition-duration: 0.4s;
+    border-color: #75FA73;
+    background: linear-gradient(to right, #79c3b4 5%, #75FA73 95%);
+}

@@ -1,23 +1,29 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import List from "../../components/List/List";
-import Input from "../../components/Input/Input";
 import Alert from "../../components/Alert/Alert";
 import './Todo.css'
 
+const getLocalStorage = () => {
+    let list = localStorage.getItem('list');
+    if (list) {
+        return (list = JSON.parse(localStorage.getItem('list')));
+    } else {
+        return [];
+    }
+};
+
 const Todo = () => {
-    const [list, setList] = useState([]);
+    const [list, setList] = useState(getLocalStorage());
     const [name, setName] = useState('');
     const [isEditing, setIsEditing] = useState(false);
     const [editID, seteditID] = useState(null);
     const [alert, setAlert] = useState({ show: false, msg: '', type: '' });
 
     const showAlert = (msg, type) => {
-        this.setState({
-            alert: {
-                show: true,
-                msg: msg,
-                type: type
-            }
+        setAlert({
+            show: true,
+            msg: msg,
+            type: type
         })
     }
 
@@ -25,11 +31,10 @@ const Todo = () => {
         clearTimeout();
         setTimeout(
             () => {
-                this.setState({
-                    alert: {
-                        show: false,
-                        msg: ''
-                    }
+                setAlert({
+                    show: false,
+                    msg: '',
+                    type: ''
                 })
             }
             , 2500);
@@ -74,6 +79,8 @@ const Todo = () => {
     }
 
     const handleClear = (e) => {
+        showAlert('Deleted All Items', 'danger');
+        hideAlert();
         e.preventDefault();
         setList([]);
     }
@@ -106,6 +113,10 @@ const Todo = () => {
             return item
         });
     }
+
+    useEffect(() => {
+        localStorage.setItem('list', JSON.stringify(list));
+    }, [list]);
 
     return (
         <div className="todo container w-50">
@@ -140,7 +151,6 @@ const Todo = () => {
             }
 
         </div>
-
     )
 }
 
