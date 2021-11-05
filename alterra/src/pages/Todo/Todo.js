@@ -11,43 +11,41 @@ const Todo = () => {
     const [editID, seteditID] = useState(null);
     const [alert, setAlert] = useState({ show: false, msg: '', type: '' });
 
+    const showAlert = (msg, type) => {
+        this.setState({
+            alert: {
+                show: true,
+                msg: msg,
+                type: type
+            }
+        })
+    }
+
+    const hideAlert = () => {
+        clearTimeout();
+        setTimeout(
+            () => {
+                this.setState({
+                    alert: {
+                        show: false,
+                        msg: ''
+                    }
+                })
+            }
+            , 2500);
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault();
         if (!name) {
             //display alert
-            setAlert({
-                show: true,
-                msg: 'The field is still empty',
-                type: 'danger'
-            })
-
-            clearTimeout();
-            setTimeout(
-                function () {
-                    setAlert({
-                        show: false,
-                        msg: ''
-                    })
-                }
-                , 2500);
+            showAlert('The field is still empty', 'danger')
+            hideAlert()
         }
         else if (name && isEditing) {
             // deal with edit
-            setAlert({
-                show: true,
-                msg: 'Edited Item',
-                type: 'success'
-            })
-
-            clearTimeout();
-            setTimeout(
-                function () {
-                    setAlert({
-                        show: false,
-                        msg: ''
-                    })
-                }
-                , 2500);
+            showAlert('Edited Item', 'success')
+            hideAlert()
 
             list.map((item) => {
                 if (editID == item.id) {
@@ -61,19 +59,8 @@ const Todo = () => {
         }
         else {
             //display alert
-            setAlert({
-                show: true,
-                msg: 'Added Item',
-                type: 'success'
-            })
-            setTimeout(
-                function () {
-                    setAlert({
-                        show: false,
-                        msg: ''
-                    })
-                }
-                , 2500);
+            showAlert('Added Item', 'success')
+            hideAlert()
 
             //deal with add items
             const newItem = {
@@ -92,19 +79,8 @@ const Todo = () => {
     }
 
     const handleDelete = (id) => {
-        setAlert({
-            show: true,
-            msg: 'Deleted Item',
-            type: 'danger'
-        })
-        setTimeout(
-            function () {
-                setAlert({
-                    show: false,
-                    msg: ''
-                })
-            }
-            , 2500);
+        showAlert('Deleted item', 'danger');
+        hideAlert();
         setList(list.filter((item) => {
             if (id != item.id) {
                 return item
@@ -120,19 +96,8 @@ const Todo = () => {
     }
 
     const handleCheck = (id) => {
-        setAlert({
-            show: true,
-            msg: 'Checked Out Item',
-            type: 'danger'
-        })
-        setTimeout(
-            function () {
-                setAlert({
-                    show: false,
-                    msg: ''
-                })
-            }
-            , 2500);
+        showAlert('Checked Out Item', 'danger');
+        hideAlert();
         list.map((item) => {
             if (item.id == id) {
                 item.status = true
