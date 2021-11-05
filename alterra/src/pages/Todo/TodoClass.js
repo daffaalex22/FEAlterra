@@ -10,7 +10,7 @@ export default class TodoClass extends Component {
     constructor() {
         super()
         this.state = {
-            list: [],
+            list: this.getLocalStorage(),
             name: '',
             isEditing: false,
             editID: null,
@@ -25,20 +25,31 @@ export default class TodoClass extends Component {
         // this.storageChanged = this.storageChanged.bind(this);
     }
 
-    // storageChanged() {
-    //     if (this.state.list != JSON.parse(localStorage.getItem('list'))) {
-    //         console.log("localstoragechanged")
-    //         localStorage.setItem('list', JSON.stringify(this.state.list))
-    //     }
-    // }
-    // componentDidMount() {
-    //     window.addEventListener('storage', () => localStorage.setItem('list', JSON.stringify(this.state.list)));
-    // }
+    getLocalStorage = () => {
+        console.log("getlocalstorage")
+        let list = localStorage.getItem('list');
+        if (list) {
+            return (list = JSON.parse(localStorage.getItem('list')));
+        } else {
+            return [];
+        }
+    };
 
+    storageChanged = (e) => {
+        console.log("Onstoragechanged")
+        if ('list' == e.key && this.state.list != JSON.parse(e.newValue)) {
+            console.log("localstoragechanged")
+            localStorage.setItem('list', JSON.stringify(this.state.list))
+        }
+    }
+    componentDidMount() {
+        window.addEventListener('storage', (e) => this.storageChanged(e));
+        this.storageChanged = this.storageChanged.bind(this);
+    }
 
-    // componentWillUnmount() {
-    //     window.removeEventListener('storage', this.storageChanged)
-    // }
+    componentWillUnmount() {
+        window.removeEventListener('storage', this.storageChanged)
+    }
 
     showAlert(msg, type) {
         this.setState({
@@ -84,9 +95,7 @@ export default class TodoClass extends Component {
                 return item
             })
             this.setState({
-                name: ''
-            })
-            this.setState({
+                name: '',
                 isEditing: false
             })
         }
@@ -102,11 +111,10 @@ export default class TodoClass extends Component {
                 status: false
             };
             this.setState({
+                name: '',
                 list: [...this.state.list, newItem]
             })
-            this.setState({
-                name: ''
-            })
+            localStorage.setItem('list', JSON.stringify(this.state.list))
         }
 
     }
@@ -134,7 +142,7 @@ export default class TodoClass extends Component {
     }
 
     handleEdit = (id) => {
-        const specificItem = this.state.list.find((item) => item.id == id);
+        const specificItem = this.state.list.find((item) => item.id === id);
         this.setState({
             isEditing: true,
             editID: id,
@@ -146,7 +154,7 @@ export default class TodoClass extends Component {
         this.showAlert('Checked Out Item', 'danger');
         this.hideAlert();
         this.state.list.map((item) => {
-            if (item.id == id) {
+            if (item.id === id) {
                 item.status = true
                 return item
             }
