@@ -18,9 +18,9 @@ function App() {
     <BrowserRouter>
       <div className="App">
         <Switch>
-          <Route exact path="/"><Navbar component={<Todo />} /></Route>
-          <Route path="/about-author"><Navbar component={<AboutAuthor />} /></Route>
-          <Route path="/about-app"><Navbar component={<AboutApp />} /></Route>
+          <Route exact path="/"><Navbar component={<Todo />} tab='home' /></Route>
+          <Route path="/about-author"><Navbar component={<AboutAuthor />} tab='about-author' /></Route>
+          <Route path="/about-app"><Navbar component={<AboutApp />} tab='about-app' /></Route>
           <Route path="*"><NotFound /></Route>
         </Switch>
       </div >
