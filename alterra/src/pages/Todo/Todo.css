@@ -62,8 +62,8 @@
     padding: 0.25rem;
     text-transform: capitalize;
     letter-spacing: 1px;
-    border-top-right-radius: 1.3rem;
-    border-bottom-right-radius: 1.3rem;
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem;
     cursor: pointer;
     content: #75FA73;
     transition: all 0.3s linear;

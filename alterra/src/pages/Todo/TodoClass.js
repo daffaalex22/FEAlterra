@@ -3,6 +3,8 @@ import './Todo.css'
 import React, { Component } from 'react'
 import Alert from '../../components/Alert/Alert'
 import List from '../../components/List/List'
+import ListClass from '../../components/List/ListClass'
+import AlertClass from '../../components/Alert/AlertClass'
 
 export default class TodoClass extends Component {
     constructor() {
@@ -18,7 +20,25 @@ export default class TodoClass extends Component {
                 type: ''
             }
         }
+
+
+        // this.storageChanged = this.storageChanged.bind(this);
     }
+
+    // storageChanged() {
+    //     if (this.state.list != JSON.parse(localStorage.getItem('list'))) {
+    //         console.log("localstoragechanged")
+    //         localStorage.setItem('list', JSON.stringify(this.state.list))
+    //     }
+    // }
+    // componentDidMount() {
+    //     window.addEventListener('storage', () => localStorage.setItem('list', JSON.stringify(this.state.list)));
+    // }
+
+
+    // componentWillUnmount() {
+    //     window.removeEventListener('storage', this.storageChanged)
+    // }
 
     showAlert(msg, type) {
         this.setState({
@@ -49,7 +69,7 @@ export default class TodoClass extends Component {
         // console.log('handleSubmit Started');
         if (this.state.name === "") {
             this.showAlert('The field is still empty', 'danger');
-            this.hideAlert();
+            // this.hideAlert();
         }
         else if (this.state.name && this.state.isEditing) {
             // deal with edit
@@ -88,16 +108,19 @@ export default class TodoClass extends Component {
                 name: ''
             })
         }
+
     }
 
     handleClear() {
+        this.showAlert('Deleted All Items', 'danger');
+        this.hideAlert();
         this.setState({
             list: []
         })
     }
 
     handleDelete = (id) => {
-        console.log('Masuk HandleDelete')
+        // console.log('Masuk HandleDelete')
         this.showAlert('Deleted item', 'danger');
         this.hideAlert();
         this.setState({
@@ -137,7 +160,7 @@ export default class TodoClass extends Component {
                 <form action="" className="todo-form" onSubmit={(e) => this.handleSubmit(e)}>
                     <h3>Todos</h3>
                     {this.state.alert.show &&
-                        <Alert msg={this.state.alert.msg} type={this.state.alert.type} />
+                        <AlertClass msg={this.state.alert.msg} type={this.state.alert.type} />
                     }
                     <br />
                     <div className="form-control w-75 m-auto">
@@ -158,7 +181,7 @@ export default class TodoClass extends Component {
                 </form>
                 {this.state.list.length > 0 &&
                     <div>
-                        <List list={this.state.list} deleteItem={this.handleDelete} editItem={this.handleEdit} checkItem={this.handleCheck} />
+                        <ListClass list={this.state.list} deleteItem={this.handleDelete} editItem={this.handleEdit} checkItem={this.handleCheck} />
                         <button className="clear-btn" onClick={() => this.handleClear()}>
                             Clear All
                         </button>

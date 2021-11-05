@@ -1,8 +1,17 @@
+.alert {
+  font-size: small;
+  padding: 2px;
+  margin: auto;
+  width: 20em;
+  height: fit-content;
+}
+
 .alert-danger {
-    color: #721c24;
-    background: #f8d7da;
-  }
+  color: #721c24;
+  background: #f8d7da;
+}
+
 .alert-success {
-    color: #155724;
-    background: #d4edda;
-  }
+  color: #155724;
+  background: #d4edda;
+}
