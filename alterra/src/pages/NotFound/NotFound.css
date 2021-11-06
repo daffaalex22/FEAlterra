@@ -1,12 +1,16 @@
-.todo {
+.not-found {
     margin-top: 15vh;
     margin-bottom: 10vh;
     padding: 3% 3% 5% 3%;
     text-align: center;
-    border: 1px solid lightgray;
     border-radius: 5px;
-    box-shadow: 5px 5px lightgray;
     background-color: white;
+    outline: 1px solid lightgray;
+    transition: all 0.25s ease-in-out;
+}
+
+.not-found:hover {
+    outline: 5px solid #79c3b4;
 }
 
 .no-data {

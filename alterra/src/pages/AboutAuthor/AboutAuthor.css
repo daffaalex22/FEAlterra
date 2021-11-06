@@ -2,10 +2,14 @@
     margin: 15vh auto;
     padding: 3% 7% 5% 7%;
     text-align: center;
-    border: 1px solid lightgray;
     border-radius: 5px;
-    box-shadow: 5px 5px lightgray;
     background-color: white;
+    outline: 1px solid lightgray;
+    transition: all 0.25s ease-in-out;
+}
+
+.about-author:hover {
+    outline: 5px solid #79c3b4;
 }
 
 .about-author h1 {

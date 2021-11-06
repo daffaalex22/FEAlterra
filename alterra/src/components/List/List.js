@@ -21,7 +21,7 @@ const List = ({ list, deleteItem, editItem, checkItem }) => {
                                 </button>
                             </div>
                             {
-                                item.status === true ?
+                                item.checked ?
                                     <p className="done">
                                         {item.title}
                                     </p> :

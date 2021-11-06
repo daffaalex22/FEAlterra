@@ -2,16 +2,16 @@
     margin: 15vh auto;
     padding: 3% 3% 5% 3%;
     text-align: center;
-    border: 1px solid lightgray;
-    border-radius: 5px;
-    /* filter: drop-shadow(30px 10px 4px pink); */
-    box-shadow: 5px 5px lightgray;
+    outline: 1px solid lightgray;
+    border-radius: 1px;
+    /* box-shadow: 1px 1px lightgray; */
     background-color: white;
     overflow-y: visible;
+    transition: all 0.25s ease-in-out;
 }
 
-.todo::hover {
-    box-shadow: 5px 10px;
+.todo:hover {
+    outline: 5px solid #79c3b4;
 }
 
 .todo-form h3 {

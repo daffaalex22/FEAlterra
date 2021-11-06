@@ -71,7 +71,7 @@ const Todo = () => {
             const newItem = {
                 id: new Date().getTime().toString(),
                 title: name,
-                status: false
+                checked: false
             };
             setList([...list, newItem]);
             setName('')
@@ -103,11 +103,18 @@ const Todo = () => {
     }
 
     const handleCheck = (id) => {
-        showAlert('Checked Out Item', 'danger');
-        hideAlert();
         list.map((item) => {
             if (item.id == id) {
-                item.status = true
+                if (item.checked) {
+                    item.checked = false
+                    showAlert('Unchecked Item', 'success');
+                    hideAlert();
+                }
+                else {
+                    item.checked = true
+                    showAlert('Checked Out Item', 'danger');
+                    hideAlert();
+                }
                 return item
             }
             return item
