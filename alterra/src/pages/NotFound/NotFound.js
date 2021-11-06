@@ -6,7 +6,7 @@ const NotFound = () => {
     return (
         <div className="todo container w-50">
             <p className="no-data">
-                No Data :(
+                Page Not Found :(
             </p>
             <UndrawNoData
                 primaryColor='#75FA73'

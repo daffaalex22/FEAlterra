@@ -1,10 +1,8 @@
 import './Navbar.css';
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
-import { FaMinus } from 'react-icons/fa';
+import { FaMinus, FaBars } from 'react-icons/fa';
 
-const Navbar = ({ component, tab, closeNav, navIsOpen }) => {
-
+const Navbar = ({ component, tab, openNav, closeNav, navIsOpen, pageStyle }) => {
     return (
         <div className="navbar align-items-start position-fixed">
             <div className="d-flex align-items-start ">
@@ -27,9 +25,15 @@ const Navbar = ({ component, tab, closeNav, navIsOpen }) => {
                         </div>
                     </div>
                 }
-                <div className="tab-content" id="v-pills-tabContent">
+                <div className="tab-content" id="v-pills-tabContent" style={pageStyle}>
                     <div className="tab-pane fade show active" id="v-pills-home"
-                        role="tabpanel" aria-labelledby="v-pills-home-tab">{component}</div>
+                        role="tabpanel" aria-labelledby="v-pills-home-tab">
+                        {!navIsOpen &&
+                            <button className="btn bar-btn position-fixed" onClick={openNav}>
+                                <FaBars className="bar-icon position-fixed justify-content-end" />
+                            </button>
+                        }
+                        {component}</div>
                     <div className="tab-pane fade" id="v-pills-about-app"
                         role="tabpanel" aria-labelledby="v-pills-about-app-tab">{component}</div>
                     <div className="tab-pane fade" id="v-pills-about-author"

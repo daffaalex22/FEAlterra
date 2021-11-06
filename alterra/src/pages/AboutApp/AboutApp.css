@@ -1,7 +1,27 @@
 .about-app {
-    margin: auto;
+    margin: 15vh auto;
+    padding: 3% 7% 5% 7%;
+    text-align: center;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    box-shadow: 5px 5px lightgray;
+    background-color: white;
+}
+
+.about-app h1 {
+    font-weight: bolder;
+    font-size: 50px;
+    font-family: cursive;
+    color: black;
+    line-height: 1.5em;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    background: linear-gradient(to right, #79c3b4 30%, #75FA73 70%);
+    background-clip: padding-box;
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
 }
 
 .about-app p {
-    overflow-x: visible;
+    text-align: justify;
 }

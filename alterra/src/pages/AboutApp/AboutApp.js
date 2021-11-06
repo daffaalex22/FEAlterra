@@ -2,8 +2,9 @@ import './AboutApp.css'
 
 const AboutApp = () => {
     return (
-        <div className="about-app">
+        <div className="about-app container w-75">
             <h1>About App</h1>
+            <br />
             <p>
                 Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quidem veritatis, voluptatem autem nobis quam, facere asperiores saepe quasi dignissimos voluptate perferendis. Repellat illo asperiores, saepe ut reiciendis beatae obcaecati ipsa.
                 Sapiente repellat nobis, possimus doloribus impedit, officia, non eaque molestiae temporibus deserunt nemo error earum? Sed harum officia id voluptatibus, eius corporis expedita. Reiciendis porro ipsam libero! Sit, commodi natus.
