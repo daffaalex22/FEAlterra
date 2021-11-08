@@ -18,10 +18,10 @@ const Navbar = ({ component, tab, openNav, closeNav, navIsOpen, pageStyle }) => 
                                 role="tab" aria-controls="v-pills-home" to="/">Home</Link>
                             <Link className={`btn btn-outline-primary ${tab}-btn nav-link ${tab == 'about-app' ? 'active' : ''}`}
                                 id="v-pills-about-app-tab" data-bs-toggle="pill" data-bs-target="#v-pills-about-app" type="button"
-                                role="tab" aria-controls="v-pills-about-app" to="/about-app">About App</Link>
+                                role="tab" aria-controls="v-pills-about-app" to="/about/about-app">About App</Link>
                             <Link className={`btn btn-outline-primary ${tab}-btn nav-link ${tab == 'about-author' ? 'active' : ''}`}
                                 id="v-pills-about-author-tab" data-bs-toggle="pill" data-bs-target="#v-pills-about-author" type="button"
-                                role="tab" aria-controls="v-pills-about-author" to="/about-author">About Author</Link>
+                                role="tab" aria-controls="v-pills-about-author" to="/about/about-author">About Author</Link>
                         </div>
                     </div>
                 }

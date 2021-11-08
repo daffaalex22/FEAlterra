@@ -28,7 +28,6 @@ const Todo = () => {
     }
 
     const hideAlert = () => {
-        clearTimeout();
         setTimeout(
             () => {
                 setAlert({

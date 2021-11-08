@@ -50,9 +50,9 @@ function App() {
         <Switch>
           <Route exact path="/"><Navbar component={<Todo /*pageStyle={pageStyle}*/ />}
             tab='home' openNav={handleOpenNav} closeNav={handleCloseNav} navIsOpen={navIsOpen} /*pageStyle={pageStyle}*/ /></Route>
-          <Route path="/about-author"><Navbar component={<AboutAuthor /*style={pageStyle}*/ />}
+          <Route path="/about/about-author"><Navbar component={<AboutAuthor /*style={pageStyle}*/ />}
             tab='about-author' openNav={handleOpenNav} closeNav={handleCloseNav} navIsOpen={navIsOpen} /*pageStyle={pageStyle}*/ /></Route>
-          <Route path="/about-app"><Navbar component={<AboutApp /*style={pageStyle}*/ />}
+          <Route path="/about/about-app"><Navbar component={<AboutApp /*style={pageStyle}*/ />}
             tab='about-app' openNav={handleOpenNav} closeNav={handleCloseNav} navIsOpen={navIsOpen} /*pageStyle={pageStyle}*/ /></Route>
           <Route path="*"><NotFound /></Route>
         </Switch>
