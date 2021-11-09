@@ -12,7 +12,7 @@ const NotFound = () => {
                 primaryColor='#75FA73'
                 height='35vh' />
 
-            <Link className='btn btn-outline-primary' to="/">Back to Home</Link>
+            <Link className='btn btn-outline-primary' to="/home">Back to Home</Link>
         </div>
     );
 }
