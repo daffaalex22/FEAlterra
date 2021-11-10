@@ -1,22 +1,54 @@
 import { useState, useEffect } from "react";
 import List from "../../components/List/List";
 import Alert from "../../components/Alert/Alert";
+import { useSelector, useDispatch } from "react-redux";
 import './Todo.css'
-
-const getLocalStorage = () => {
-    let list = localStorage.getItem('list');
-    if (list) {
-        return (list = JSON.parse(localStorage.getItem('list')));
-    } else {
-        return [];
-    }
-};
+import { changeName, resetName } from '../../redux'
+import { deleteItem, addItem, deleteAllItems, checkUncheck, editItem, editingItem } from '../../redux'
 
 const Todo = () => {
-    const [list, setList] = useState(getLocalStorage());
-    const [name, setName] = useState('');
-    const [isEditing, setIsEditing] = useState(false);
-    const [editID, seteditID] = useState(null);
+    const dispatch = useDispatch()
+
+    // name state
+    // const [name, setName] = useState('');
+    const name = useSelector(state => state.name.name);
+    const setName = (newName) => {
+        dispatch(changeName(newName))
+    }
+    const clearName = () => {
+        dispatch(resetName())
+    }
+
+    //List state
+    // const [list, setList] = useState(getLocalStorage());
+    // const [isEditing, setIsEditing] = useState(false);
+    // const [editID, seteditID] = useState(null);
+    const list = useSelector(state => state.list.list)
+    const isEditing = useSelector(state => state.list.isEditing)
+    // const editID = useSelector(state => state.list.editID)
+
+    const editingAnItem = (newTitle) => {
+        dispatch(editingItem(newTitle))
+    }
+
+    const editAnItem = (editId) => {
+        dispatch(editItem(editId))
+    }
+
+    const addAnItem = (titleItem) => {
+        dispatch(addItem(titleItem))
+    }
+
+    const clearAllItems = () => {
+        dispatch(deleteAllItems())
+    }
+
+    const deleteAnItem = (deleteId) => {
+        dispatch(deleteItem(deleteId))
+    }
+
+
+    //alert state
     const [alert, setAlert] = useState({ show: false, msg: '', type: '' });
 
     const showAlert = (msg, type) => {
@@ -51,15 +83,16 @@ const Todo = () => {
             showAlert('Edited Item', 'success')
             hideAlert()
 
-            list.map((item) => {
-                if (editID == item.id) {
-                    item.title = name;
-                    return item
-                }
-                return item
-            })
-            setName('')
-            setIsEditing(false)
+            // list.map((item) => {
+            //     if (editID == item.id) {
+            //         item.title = name;
+            //         return item
+            //     }
+            //     return item
+            // })
+            editingAnItem(name)
+            clearName()
+            // setIsEditing(false)
         }
         else {
             //display alert
@@ -67,13 +100,14 @@ const Todo = () => {
             hideAlert()
 
             //deal with add items
-            const newItem = {
-                id: new Date().getTime().toString(),
-                title: name,
-                checked: false
-            };
-            setList([...list, newItem]);
-            setName('')
+            // const newItem = {
+            //     id: new Date().getTime().toString(),
+            //     title: name,
+            //     checked: false
+            // };
+            // setList([...list, newItem]);
+            addAnItem(name)
+            clearName()
         }
     }
 
@@ -81,23 +115,26 @@ const Todo = () => {
         showAlert('Deleted All Items', 'danger');
         hideAlert();
         e.preventDefault();
-        setList([]);
+        // setList([]);
+        clearAllItems()
     }
 
     const handleDelete = (id) => {
         showAlert('Deleted item', 'danger');
         hideAlert();
-        setList(list.filter((item) => {
-            if (id != item.id) {
-                return item
-            }
-        }))
+        // setList(list.filter((item) => {
+        //     if (id != item.id) {
+        //         return item
+        //     }
+        // }))
+        deleteAnItem(id);
     }
 
     const handleEdit = (id) => {
         const specificItem = list.find((item) => item.id == id);
-        setIsEditing(true);
-        seteditID(id);
+        editAnItem(id)
+        // setIsEditing(true);
+        // seteditID(id);
         setName(specificItem.title);
     }
 
