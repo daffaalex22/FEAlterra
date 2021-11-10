@@ -1,14 +1,20 @@
 import './Navbar.css';
 import { Link } from 'react-router-dom';
 import { FaMinus, FaBars } from 'react-icons/fa';
+import { closeNav, openNav } from '../../redux';
+import { useSelector, useDispatch } from "react-redux";
 
-const Navbar = ({ component, tab, openNav, closeNav, navIsOpen, pageStyle }) => {
+
+const Navbar = ({ component, tab }) => {
+    const navIsOpen = useSelector(state => state.navIsOpen.navIsOpen)
+    const dispatch = useDispatch()
+
     return (
         <div className="navbar align-items-start">
             <div className="d-flex align-items-start ">
                 {navIsOpen &&
                     <div className="sidebar">
-                        <button className="btn close-btn position-fixed" onClick={closeNav}>
+                        <button className="btn close-btn position-fixed" onClick={() => dispatch(closeNav())}>
                             <FaMinus className="close-icon position-fixed justify-content-end" />
                         </button>
                         <div className="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist"
@@ -28,11 +34,11 @@ const Navbar = ({ component, tab, openNav, closeNav, navIsOpen, pageStyle }) => 
                         </div>
                     </div>
                 }
-                <div className={`tab-content tab-content-${tab}`} id="v-pills-tabContent" style={pageStyle}>
+                <div className={`tab-content tab-content-${tab}`} id="v-pills-tabContent" /*style={pageStyle}*/>
                     <div className=" tab-pane fade show active" id="v-pills-home"
                         role="tabpanel" aria-labelledby="v-pills-home-tab">
                         {!navIsOpen &&
-                            <button className="btn bar-btn position-fixed" onClick={openNav}>
+                            <button className="btn bar-btn position-fixed" onClick={() => dispatch(openNav())}>
                                 <FaBars className="bar-icon position-fixed justify-content-end" />
                             </button>
                         }
