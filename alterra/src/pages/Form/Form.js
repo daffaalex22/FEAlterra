@@ -17,32 +17,16 @@ const Form = () => {
         name: "",
         email: "",
         phoneNumber: "",
-        education: "",
-        class: "",
-        commitmentLetter: ''
     }
 
-    const commitmentLetter = useRef(null)
+    const commitmentLetter = useRef('')
     const [data, setData] = useState(baseData)
-    const [errorMessage, setErrorMessage] = useState(baseError)
-    const [alert, setAlert] = useState({ field: '', msg: '', type: '' })
-    const [alertList, setAlertList] = useState([])
-    const [hasError, setHasError] = useState(false)
-    const [array, setArray] = useState([]);
-    const prefArray = useRef()
-
-    useEffect(() => {
-        prefArray.current = array;
-    }, [array])
-
-    const prefArr = prefArray.current;
-
-    let angka = [1];
-    angka.forEach((item) => {
-        // setArray(item);
-        console.log(item)
-    })
-    console.log("array state:", array)
+    const [errorMessage, setErrorMessage] = useState(baseError);
+    const regexName = /^[A-Za-z ]*$/
+    const regexEmail = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+    // const [alert, setAlert] = useState({ field: '', msg: '', type: '' })
+    // const [alertList, setAlertList] = useState([])
+    // const [hasError, setHasError] = useState(false)
 
     // console.log(alertList)
     // useEffect(() => {
@@ -51,13 +35,13 @@ const Form = () => {
     //     }
     // }, [alert])
 
-    useEffect(() => {
-        if (alertList.length > 0) {
-            setHasError(true)
-        } else {
-            setHasError(false)
-        }
-    }, [alertList])
+    // useEffect(() => {
+    //     if (alertList.length > 0) {
+    //         setHasError(true)
+    //     } else {
+    //         setHasError(false)
+    //     }
+    // }, [alertList])
 
     // const showAlert = (field, msg, type) => {
     //     setAlert({
@@ -72,6 +56,30 @@ const Form = () => {
         const name = target.name;
         const value = target.type === 'checkbox' ? target.checked : target.value;
 
+        if (name === 'name') {
+            if (!regexName.test(value)) {
+                setErrorMessage({ ...errorMessage, [name]: 'Full Name should contain only letters' })
+            } else {
+                setErrorMessage({ ...errorMessage, [name]: '' })
+            }
+        }
+
+        if (name === "email") {
+            if (!regexEmail.test(value)) {
+                setErrorMessage({ ...errorMessage, [name]: 'Email is Wrong' })
+            } else {
+                setErrorMessage({ ...errorMessage, [name]: '' })
+            }
+        }
+
+        if (name === "phoneNumber") {
+            if (value.length < 9 || value.length > 14) {
+                setErrorMessage({ ...errorMessage, [name]: 'Phone Number is Wrong' })
+            } else {
+                setErrorMessage({ ...errorMessage, [name]: '' })
+            }
+        }
+
         setData({
             ...data,
             [name]: value
@@ -80,45 +88,27 @@ const Form = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        // console.log(e.target[0].value)
-        var form = e.target;
-        // console.log(typeof form);
-        // console.log(Object.keys(form));
-        // console.log(Object.values(form));
-        var elements = Object.values(form);
-        // elements.forEach((item) => console.log(item.name));
-        // form.forEach((item) => console.log(item));
-        // elements.forEach((item) => {
-        //     if (item.name == 'name') {
-        //         // showAlert(item.name, 'Full Name must be filled!', 'danger')
-        //         setAlertList([...alertList, {
-        //             field: item.name,
-        //             msg: 'Full Name must be filled!',
-        //             type: 'danger'
-        //         }])
-        //         console.log('name empty')
-        //     }
-        //     else if (item.name == 'email') {
-        //         // showAlert(item.name, 'Email must be filled!', 'danger');
-        //         setAlertList([...alertList, {
-        //             field: item.name,
-        //             msg: 'Email must be filled!',
-        //             type: 'danger'
-        //         }])
-        //         console.log('email empty')
-        //     }
-        //     else if (item.name == 'phoneNumber') {
-        //         // showAlert(item.name, 'Phone Number must be filled!', 'danger');
-        //         console.log('phone number empty')
-        //     }
-        // })
+        if (errorMessage.name !== '' || errorMessage.email !== '' || errorMessage.phoneNumber !== '') {
+            // console.log("HEREEE")
+            alert(`Registration Data Error`)
+        } else {
+            // console.log("HEREE1")
+            alert(`Registration of "${data.name}" Has been Received`)
+            resetForm()
+        }
+    }
+
+    const resetForm = () => {
+        setData(baseData);
+        commitmentLetter.current.value = '';
+        setErrorMessage(baseError);
     }
 
 
 
     return (
         <div className="container w-50 form">
-            <form onSubmit={handleSubmit} noValidate>
+            <form onSubmit={handleSubmit}>
                 <label>
                     Full Name:
                     <br />
@@ -194,11 +184,15 @@ const Form = () => {
                         onChange={handleChange} />
                 </label>
                 <br />
-                {hasError &&
-                    <div>Ada Errornya</div>
-                    // <FormAlert alertList={alertList} />
-                }
-                {console.log(alertList)}
+                <ul>
+                    {Object.keys(errorMessage).map(key => {
+                        if (errorMessage[key] !== "") {
+                            return <li key={key}>{errorMessage[key]}</li>
+                        }
+                        return null
+                    })}
+                </ul>
+                <br />
                 <button type="submit">Submit</button>
                 <button type="reset" value="reset">Reset</button>
             </form >
