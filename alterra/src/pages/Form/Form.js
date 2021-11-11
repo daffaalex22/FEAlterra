@@ -24,32 +24,6 @@ const Form = () => {
     const [errorMessage, setErrorMessage] = useState(baseError);
     const regexName = /^[A-Za-z ]*$/
     const regexEmail = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
-    // const [alert, setAlert] = useState({ field: '', msg: '', type: '' })
-    // const [alertList, setAlertList] = useState([])
-    // const [hasError, setHasError] = useState(false)
-
-    // console.log(alertList)
-    // useEffect(() => {
-    //     if (alert.msg) {
-    //         setAlertList([...alertList, alert])
-    //     }
-    // }, [alert])
-
-    // useEffect(() => {
-    //     if (alertList.length > 0) {
-    //         setHasError(true)
-    //     } else {
-    //         setHasError(false)
-    //     }
-    // }, [alertList])
-
-    // const showAlert = (field, msg, type) => {
-    //     setAlert({
-    //         field: field,
-    //         msg: msg,
-    //         type: type
-    //     })
-    // }
 
     const handleChange = (e) => {
         const target = e.target;

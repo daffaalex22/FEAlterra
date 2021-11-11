@@ -29,6 +29,15 @@ describe('FormPage', () => {
         expect(screen.getByLabelText(/Email/)).toHaveValue('Pablo Escobar');
     });
 
+    // test('Number input for no Handphone with invalid value', () => {
+    //     render(<FormCoding />);
+    //     fireEvent.input(screen.getByRole("spinbutton", { name: /noHandphone/i }), {
+    //         target: { value: '123' },
+    //     });
+    //     expect(screen.getByText('No Handphone Tidak Sesuai')).toBeInTheDocument();
+    //     expect(screen.getByLabelText(/No Handphone/)).toHaveValue('123');
+    // });
+
     test('Input text for name and email with valid value', () => {
         render(<FormCoding />);
         fireEvent.input(screen.getByRole("textbox", { name: /nama/i }), {
@@ -56,5 +65,20 @@ describe('FormPage', () => {
         expect(window.alert).toBeCalledWith("Data Pendaftar Tidak Sesuai");
         expect(screen.getByLabelText(/Nama/)).toHaveValue('Buku Hebat');
         expect(screen.getByLabelText(/Email/)).toHaveValue('emailmail.com');
+    });
+
+    test('submit button without error', () => {
+        render(<FormCoding />);
+        jest.spyOn(window, 'alert').mockImplementation(() => { });
+        fireEvent.input(screen.getByRole("textbox", { name: /nama/i }), {
+            target: { value: 'Pablo' },
+        });
+        fireEvent.input(screen.getByRole("textbox", { name: /email/i }), {
+            target: { value: 'pablo@mail.com' },
+        });
+        fireEvent.submit(screen.getByText("Submit"))
+        expect(window.alert).toBeCalledWith("Data Pendaftar \"Pablo\" Berhasil Diterima");
+        // expect(screen.getByLabelText(/Nama/)).toHaveValue('Pablo');
+        // expect(screen.getByLabelText(/Email/)).toHaveValue('pablo@mail.com');
     });
 });
