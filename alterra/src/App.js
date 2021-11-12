@@ -9,7 +9,6 @@ import NotFound from './pages/NotFound/NotFound';
 import Navbar from './pages/Navbar/Navbar';
 import Form from './pages/Form/Form';
 
-
 //STUFF FROM REACT
 import React from 'react';
 import { useState, useEffect } from 'react';
