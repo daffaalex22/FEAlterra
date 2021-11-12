@@ -1,8 +1,16 @@
-.contactUs {
+.contact-us {
     color: #19345E;
     font-family: Roboto, sans-serif;
     margin: 0;
     height: 61vmax;
+}
+
+.error-message {
+    color: red;
+}  
+
+.error-true {
+    border-color: red;
 }
 
 h3 {
