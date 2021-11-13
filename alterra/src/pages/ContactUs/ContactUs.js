@@ -2,16 +2,28 @@ import './ContactUs.css'
 import logoAlta from '../../img/logo-ALTA-v2@2x.png'
 import workingPeople from '../../img/charles-rRWiVQzLm7k-unsplash.jpg'
 import darkBlue from '../../img/birutua.png'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
+import { useHistory } from 'react-router'
 
 const ContactUs = () => {
 
-    // var hasError = {}
-    const [hasError, setHasError] = useState({
-        fullname: false,
-        email: false,
-        phone: false
+    const history = useHistory();
+
+    const [noErr, setNoErr] = useState(false)
+    const [noError, setNoError] = useState({
+        fullname: true,
+        email: true,
+        phone: true
     })
+
+    const handleFocus = (e) => {
+        setNoError((prevState) => ({
+            ...prevState,
+            [e.target.name]: true
+        }))
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault()
 
@@ -19,18 +31,31 @@ const ContactUs = () => {
         Array.prototype.slice.call(forms)
             .forEach((form) => {
                 if (!form.value) {
-                    setHasError((prevState) => ({
-                        ...prevState,
-                        [form.name]: true
-                    }))
+                    if (form.name === "fullname" || form.name === "email" || form.name === "phone") {
+                        setNoError((prevState) => ({
+                            ...prevState,
+                            [form.name]: false
+                        }))
+                        setNoErr(false)
+                    }
                 } else {
-                    setHasError((prevState) => ({
-                        ...prevState,
-                        [form.name]: false
-                    }))
+                    if (form.name === "fullname" || form.name === "email" || form.name === "phone") {
+                        setNoError((prevState) => ({
+                            ...prevState,
+                            [form.name]: true
+                        }))
+                        if (noError.fullname && noError.email && noError.phone) {
+                            setNoErr(noError.fullname && noError.email && noError.phone)
+                        }
+                    }
                 }
             })
-        console.log(hasError)
+
+        console.log(noError)
+        console.log(noErr)
+        if (noErr) {
+            history.push('/review-message')
+        }
     }
 
     return (
@@ -46,12 +71,9 @@ const ContactUs = () => {
                 <form className="needs-validation" onSubmit={handleSubmit} noValidate>
                     <div className="form-group">
                         <label htmlFor="FullName">Full Name<span className="text-danger">*</span></label>
-                        <input type="text" className={`form-control error-${hasError.fullname}`} id="FullName" name="fullname"
+                        <input type="text" className={`form-control error-${!noError.fullname}`} onFocus={handleFocus} id="FullName" name="fullname"
                             placeholder="Your Full Name Here..." />
-                        {/* <div className="invalid-feedback">
-                            Full name cannot be empty
-                        </div> */}
-                        {hasError.fullname &&
+                        {!noError.fullname &&
                             <div className="error-message ">
                                 Full name cannot be empty
                             </div>
@@ -59,12 +81,9 @@ const ContactUs = () => {
                     </div><br />
                     <div className="form-group">
                         <label htmlFor="Email">Email Address<span className="text-danger">*</span></label>
-                        <input type="email" className={`form-control error-${hasError.email}`} id="Email" name="email" placeholder="example@domain.com"
+                        <input type="email" className={`form-control error-${!noError.email}`} onFocus={handleFocus} id="Email" name="email" placeholder="example@domain.com"
                         />
-                        {/* <div className="invalid-feedback ">
-                            Email address cannot be empty
-                        </div> */}
-                        {hasError.email &&
+                        {!noError.email &&
                             <div className="error-message ">
                                 Email address cannot be empty
                             </div>
@@ -72,11 +91,8 @@ const ContactUs = () => {
                     </div><br />
                     <div className="form-group">
                         <label htmlFor="Phone">Phone Number<span className="text-danger">*</span></label>
-                        <input type="text" className={`form-control error-${hasError.phone}`} id="Phone" name="phone" placeholder="08573890xxxxx" />
-                        {/* <div className="invalid-feedback">
-                            Phone Number cannot be empty
-                        </div> */}
-                        {hasError.phone &&
+                        <input type="text" className={`form-control error-${!noError.phone}`} onFocus={handleFocus} id="Phone" name="phone" placeholder="08573890xxxxx" />
+                        {!noError.phone &&
                             <div className="error-message ">
                                 Phone Number cannot be empty
                             </div>
@@ -85,7 +101,6 @@ const ContactUs = () => {
                     <div>
                         <label htmlFor="nationality">Nationality</label>
                         <select className="form-select" aria-label="Default select example" id="nationality" name="nationality" defaultValue="Indonesian">
-                            {/* <option selected>Selected</option> */}
                             <option value="Chinese">Chinese</option>
                             <option value="Indonesian">Indonesian</option>
                             <option value="Russian">Russian</option>
@@ -95,12 +110,18 @@ const ContactUs = () => {
                         <label htmlFor="msg">Message</label> <br />
                         <textarea name="message" id="msg" cols="65" rows="5" placeholder="Enter Message Here..."></textarea>
                     </div><br />
-                    <button type="submit" className="btn btn-primary btn-md rounded-pill" id="SUB" value="Submit"
-                    >Submit</button>
+                    <button
+                        type="submit"
+                        className="btn btn-primary btn-md rounded-pill"
+                        id="SUB"
+                        value="Submit"
+                    >
+                        Submit
+                    </button>
                 </form>
 
             </div>
-        </div>
+        </div >
     );
 }
 

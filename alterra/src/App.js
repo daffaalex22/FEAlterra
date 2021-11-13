@@ -4,6 +4,7 @@ import './App.css';
 //PAGES
 import Home from './pages/Home/Home'
 import ContactUs from './pages/ContactUs/ContactUs';
+import ReviewMessage from './pages/ReviewMessage/ReviewMessage';
 
 //STUFF FROM REACT
 import React from 'react';
@@ -23,6 +24,9 @@ function App() {
           </Route>
           <Route exact path="/contact-us">
             <ContactUs />
+          </Route>
+          <Route exact path="/review-message">
+            <ReviewMessage />
           </Route>
         </Switch>
       </div >
