@@ -17,6 +17,21 @@ const ContactUs = () => {
         phone: true
     })
 
+    const [data, setData] = useState({
+        nationality: "Indonesian"
+    })
+
+    const handleChange = (e) => {
+        setData((prevState) => ({
+            ...prevState,
+            [e.target.name]: e.target.value
+        }))
+    }
+
+    useEffect(() => {
+        localStorage.setItem('data', JSON.stringify(data));
+    }, [data])
+
     const handleFocus = (e) => {
         setNoError((prevState) => ({
             ...prevState,
@@ -71,7 +86,13 @@ const ContactUs = () => {
                 <form className="needs-validation" onSubmit={handleSubmit} noValidate>
                     <div className="form-group">
                         <label htmlFor="FullName">Full Name<span className="text-danger">*</span></label>
-                        <input type="text" className={`form-control error-${!noError.fullname}`} onFocus={handleFocus} id="FullName" name="fullname"
+                        <input
+                            type="text"
+                            className={`form-control error-${!noError.fullname}`}
+                            onFocus={handleFocus}
+                            onChange={handleChange}
+                            id="FullName"
+                            name="fullname"
                             placeholder="Your Full Name Here..." />
                         {!noError.fullname &&
                             <div className="error-message ">
@@ -81,7 +102,14 @@ const ContactUs = () => {
                     </div><br />
                     <div className="form-group">
                         <label htmlFor="Email">Email Address<span className="text-danger">*</span></label>
-                        <input type="email" className={`form-control error-${!noError.email}`} onFocus={handleFocus} id="Email" name="email" placeholder="example@domain.com"
+                        <input
+                            type="email"
+                            className={`form-control error-${!noError.email}`}
+                            onFocus={handleFocus}
+                            onChange={handleChange}
+                            id="Email"
+                            name="email"
+                            placeholder="example@domain.com"
                         />
                         {!noError.email &&
                             <div className="error-message ">
@@ -91,7 +119,15 @@ const ContactUs = () => {
                     </div><br />
                     <div className="form-group">
                         <label htmlFor="Phone">Phone Number<span className="text-danger">*</span></label>
-                        <input type="text" className={`form-control error-${!noError.phone}`} onFocus={handleFocus} id="Phone" name="phone" placeholder="08573890xxxxx" />
+                        <input
+                            type="text"
+                            className={`form-control error-${!noError.phone}`}
+                            onFocus={handleFocus}
+                            onChange={handleChange}
+                            id="Phone"
+                            name="phone"
+                            placeholder="08573890xxxxx"
+                        />
                         {!noError.phone &&
                             <div className="error-message ">
                                 Phone Number cannot be empty
@@ -100,7 +136,14 @@ const ContactUs = () => {
                     </div><br />
                     <div>
                         <label htmlFor="nationality">Nationality</label>
-                        <select className="form-select" aria-label="Default select example" id="nationality" name="nationality" defaultValue="Indonesian">
+                        <select
+                            className="form-select"
+                            aria-label="Default select example"
+                            id="nationality"
+                            name="nationality"
+                            defaultValue="Indonesian"
+                            onChange={handleChange}
+                        >
                             <option value="Chinese">Chinese</option>
                             <option value="Indonesian">Indonesian</option>
                             <option value="Russian">Russian</option>
@@ -108,7 +151,15 @@ const ContactUs = () => {
                     </div><br />
                     <div>
                         <label htmlFor="msg">Message</label> <br />
-                        <textarea name="message" id="msg" cols="65" rows="5" placeholder="Enter Message Here..."></textarea>
+                        <textarea
+                            name="message"
+                            id="msg"
+                            cols="65"
+                            rows="5"
+                            placeholder="Enter Message Here..."
+                            onChange={handleChange}
+                        >
+                        </textarea>
                     </div><br />
                     <button
                         type="submit"

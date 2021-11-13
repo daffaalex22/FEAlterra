@@ -1,0 +1,67 @@
+.review-message {
+    color: #19345E;
+    font-family: Roboto, sans-serif;
+}
+
+#TABBED {
+    tab-size: 8;
+}
+
+#MSG {
+    font-style: italic;
+}
+
+#BOX {
+    width: 58vw;
+    height: 70vh;
+    padding: 6.43vh 4.254vw 5.143vh 4.254vw;
+    position: absolute;
+    left: 21.2vw;
+    top: 15vh;
+    border: 1px solid #ccd7eb;
+    border-radius: 10px;
+    font-size: 16px;
+}
+
+#FOOTIM {
+    height: 27.14vh;
+    width: 100vw;
+}
+
+#BOT {
+    position: absolute;
+    top: 72.86vh;
+}
+
+#DOTS {
+    width: 9.1vw;
+    position: absolute;
+    left: 17vw;
+    top: 5.2vh;
+}
+
+#BUT {
+    width: 96px;
+    height: 40px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    background-color: #F47522;
+    border-color: #F47522;
+}
+
+#span1 {
+    padding-left: 30%;
+}
+
+#span2 {
+    padding-left: 26%;
+}
+
+#span3 {
+    padding-left: 25.5%;
+}
+
+#span4 {
+    padding-left: 29.5%;
+}
