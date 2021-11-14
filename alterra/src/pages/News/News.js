@@ -46,9 +46,9 @@ const News = () => {
     useEffect(() => {
         fetch("https://newsapi.org/v2/top-headlines?country=id&apiKey=5a7c7c2996ec4aa6be06aba77055aa89")
             .then(res => {
-                // if (!res.ok) {
-                //     throw Error('could not fetch the data for that resource');
-                // }
+                if (!res.ok) {
+                    throw Error('could not fetch the data for that resource');
+                }
                 return res.json();
             })
             .then(data => {
