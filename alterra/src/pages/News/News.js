@@ -18,27 +18,27 @@ const News = () => {
     const [data, setData] = useState(null)
     const [error, setError] = useState(null);
 
-    useEffect(() => {
-        fetch("http://localhost:8000/news")
-            .then(res => {
-                if (!res.ok) {
-                    throw Error('could not fetch the data for that resource');
-                }
-                return res.json();
-            })
-            .then(data => {
-                setData(data);
-                setError(null);
-            })
-            .catch(err => {
-                if (err.name !== 'AbortError') {
-                    setError(err.message);
-                }
-                else {
-                    console.log('Fetch Aborted')
-                }
-            })
-    }, [])
+    // useEffect(() => {
+    //     fetch("http://localhost:8000/news")
+    //         .then(res => {
+    //             if (!res.ok) {
+    //                 throw Error('could not fetch the data for that resource');
+    //             }
+    //             return res.json();
+    //         })
+    //         .then(data => {
+    //             setData(data);
+    //             setError(null);
+    //         })
+    //         .catch(err => {
+    //             if (err.name !== 'AbortError') {
+    //                 setError(err.message);
+    //             }
+    //             else {
+    //                 console.log('Fetch Aborted')
+    //             }
+    //         })
+    // }, [])
 
     const [data2, setData2] = useState(null)
     const [error2, setError2] = useState(null);
