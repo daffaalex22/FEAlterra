@@ -5,13 +5,11 @@ import './App.css';
 import Home from './pages/Home/Home'
 import ContactUs from './pages/ContactUs/ContactUs';
 import ReviewMessage from './pages/ReviewMessage/ReviewMessage';
+import News from './pages/News/News';
 
 //STUFF FROM REACT
 import React from 'react';
-import { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { Provider } from 'react-redux';
-import store from './redux/store';
 
 
 function App() {
@@ -27,6 +25,9 @@ function App() {
           </Route>
           <Route exact path="/review-message">
             <ReviewMessage />
+          </Route>
+          <Route exact path="/news">
+            <News />
           </Route>
         </Switch>
       </div >

@@ -1,0 +1,102 @@
+.content {
+    margin-top: 10rem;
+}
+
+.title {
+    font-size: 2.25em;
+    font-family: "HarrietDisplayBlack",Helvetica, sans-serif;
+    font-style: italic;
+    font-weight: bolder;
+    letter-spacing: .02em;
+    text-transform: uppercase;
+    text-align: center;
+    color: #333;
+    background-color: white;
+}
+
+.title:hover {
+    color: #275498;
+}
+
+.line {
+    top: 30vh;
+    margin-left: 11.5vw;
+    position: absolute;
+    width: 78vw;
+    height: 5vh;
+    background-color: transparent;
+    border-top: 5px solid orange;
+    border-left: 5px solid orange;
+    border-right: 5px solid orange;
+    /* border: 5px solid yellow; */
+}
+
+.news-list {
+    margin-top: 0;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 10vh;
+    width: 75vw;
+    height: 80vh;
+    background-color: white;
+    color: #275498;
+    padding: 5px;
+}
+
+.news-preview a h2 {
+    font-size: 3vh;
+    font-family: "Balto",Helvetica, sans-serif;
+    font-style: italic;
+    font-weight: 700;
+    letter-spacing: normal;
+    line-height: 1.2;
+    text-transform: none;
+    color: #333;
+}
+
+.news-preview a h2:hover {
+    color: #375bae;
+}
+
+.news-preview h4 {
+    font-family: "Balto",Helvetica, sans-serif;
+    font-size: 0.75em;
+    color: #333;
+}
+
+.news-preview p {
+    color: #333;
+    font-style: italic;
+    font-family: "Balto",Helvetica, sans-serif;
+    font-size: 0.85em;
+    font-weight: 400;
+    letter-spacing: normal;
+}
+
+author:hover {
+    color: #375bae;
+}
+
+.square-1,
+.square-2,
+.square-3,
+.square-5,
+.square-6,
+.square-7 {
+    padding: 5px;
+    width: 20vw;
+    height: fit-content;
+    background-color: white;
+    border-bottom: 1.5px solid #275498;
+}
+
+.square-4 {
+    text-align: center;
+    padding: 5px;
+    width: 30vw;
+    height: 75vh;
+    background-color: white;
+}
+
