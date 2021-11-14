@@ -104,6 +104,10 @@ const News = () => {
                         }
                     </div>
                 }
+
+                {!data2 &&
+                    <h1>{error2}</h1>
+                }
             </div>
         </div>
     );
