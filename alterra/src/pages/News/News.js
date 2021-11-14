@@ -44,7 +44,7 @@ const News = () => {
     const [error2, setError2] = useState(null);
 
     useEffect(() => {
-        fetch("https://newsapi.org/v2/top-headlines?country=id&apiKey=5a7c7c2996ec4aa6be06aba77055aa89")
+        fetch("http://newsapi.org/v2/top-headlines?country=id&apiKey=5a7c7c2996ec4aa6be06aba77055aa89")
             .then(res => {
                 if (!res.ok) {
                     throw Error('could not fetch the data for that resource');
