@@ -1,0 +1,1 @@
+https://newsapi.org/v2/top-headlines?country=id&apiKey=5a7c7c2996ec4aa6be06aba77055aa89

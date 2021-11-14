@@ -40,7 +40,30 @@ const News = () => {
             })
     }, [])
 
+    const [data2, setData2] = useState(null)
+    const [error2, setError2] = useState(null);
 
+    useEffect(() => {
+        fetch("https://newsapi.org/v2/top-headlines?country=id&apiKey=5a7c7c2996ec4aa6be06aba77055aa89")
+            .then(res => {
+                if (!res.ok) {
+                    throw Error('could not fetch the data for that resource');
+                }
+                return res.json();
+            })
+            .then(data => {
+                setData2(data);
+                setError(null);
+            })
+            .catch(err => {
+                if (err.name !== 'AbortError') {
+                    setError2(err.message);
+                }
+                else {
+                    console.log('Fetch Aborted')
+                }
+            })
+    }, [])
 
     return (
         <div className="news">
@@ -65,6 +88,20 @@ const News = () => {
                                 <p>By <author>{news.author}</author></p>
                             </div>
                         ))}
+                    </div>
+                }
+
+                {data2 &&
+                    <div className="indo-news">
+                        {data2.articles.map(news => (
+                            <div className="news-indo-preview">
+                                <h2>{news.title}</h2>
+                                <h4>{news.description}</h4>
+                                <p>By {news.author}</p>
+                                <br />
+                            </div>
+                        ))
+                        }
                     </div>
                 }
             </div>
