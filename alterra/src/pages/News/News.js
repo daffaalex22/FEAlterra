@@ -43,27 +43,47 @@ const News = () => {
     const [data2, setData2] = useState(null)
     const [error2, setError2] = useState(null);
 
-    useEffect(() => {
-        fetch("https://newsapi.org/v2/top-headlines?country=id&apiKey=5a7c7c2996ec4aa6be06aba77055aa89")
-            .then(res => {
-                if (!res.ok) {
-                    throw Error('could not fetch the data for that resource');
-                }
-                return res.json();
-            })
-            .then(data => {
-                setData2(data);
-                setError2(null);
-            })
-        // .catch(err => {
-        //     if (err.name !== 'AbortError') {
-        //         setError2(err.message);
-        //     }
-        //     else {
-        //         console.log('Fetch Aborted')
-        //     }
-        // })
-    }, [])
+    const getNews = () => {
+        const request = new XMLHttpRequest();
+
+        request.addEventListener('readystatechange', () => {
+            if (request.readyState === 4 && request.status === 200) {
+                const data = JSON.parse(request.responseText);
+                setData2(data.slice(0, 11))
+            } else if (request.readyState === 4) {
+                console.log("Failed to get the data");
+            }
+        });
+
+        request.open('GET', "https://jsonplaceholder.typicode.com/comments")
+        request.send();
+    }
+
+    getNews();
+
+    // useEffect(() => {
+    //     fetch("https://newsapi.org/v2/top-headlines?country=id&apiKey=5a7c7c2996ec4aa6be06aba77055aa89")
+    //         .then(res => {
+    //             if (!res.ok) {
+    //                 throw Error('could not fetch the data for that resource');
+    //             }
+    //             return res.json();
+    //         })
+    //         .then(data => {
+    //             setData2(data);
+    //             setError2(null);
+    //         })
+    //         .catch(err => {
+    //             if (err.name !== 'AbortError') {
+    //                 setError2(err.message);
+    //             }
+    //             else {
+    //                 console.log('Fetch Aborted')
+    //             }
+    //         })
+    // }, [])
+
+
 
     return (
         <div className="news">
@@ -93,11 +113,11 @@ const News = () => {
 
                 {data2 &&
                     <div className="indo-news">
-                        {data2.articles.map(news => (
+                        {data2.map(news => (
                             <div className="news-indo-preview">
-                                <h2>{news.title}</h2>
-                                <h4>{news.description}</h4>
-                                <p>By {news.author}</p>
+                                <h2>{news.name}</h2>
+                                <h4>{news.body}</h4>
+                                <p>By {news.email}</p>
                                 <br />
                             </div>
                         ))
