@@ -3,8 +3,20 @@ import myAva from '../../img/matthew-hamilton-tNCH0sKSZbA-unsplash.jpg';
 import './Home.css';
 
 import Header from '../../components/Header/Header';
+import { useState, useEffect } from 'react';
 
 const Home = () => {
+    // const today = new Date();
+    // const [date, setDate] = useState(today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds())
+    const [time, setTime] = useState(null)
+    useEffect(() => {
+        setInterval(() => {
+            setTime(new Date().toLocaleTimeString())
+        }, 1000)
+    }, [])
+
+
+
     return (
         <div className="home">
             <Header />
@@ -16,6 +28,7 @@ const Home = () => {
 
                 <div className="d-inline-block ps-5 align-middle pt-5" id="PART">
                     <div>
+                        <p>{time}</p>
                         <h5>Hi, my name is</h5>
                         <h1>Anne Sulivan</h1>
                         <h3>I build things for the web</h3>
