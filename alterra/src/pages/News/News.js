@@ -55,14 +55,14 @@ const News = () => {
                 setData2(data);
                 setError2(null);
             })
-            .catch(err => {
-                if (err.name !== 'AbortError') {
-                    setError2(err.message);
-                }
-                else {
-                    console.log('Fetch Aborted')
-                }
-            })
+        // .catch(err => {
+        //     if (err.name !== 'AbortError') {
+        //         setError2(err.message);
+        //     }
+        //     else {
+        //         console.log('Fetch Aborted')
+        //     }
+        // })
     }, [])
 
     return (
