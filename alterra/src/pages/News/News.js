@@ -53,7 +53,7 @@ const News = () => {
             })
             .then(data => {
                 setData2(data);
-                setError(null);
+                setError2(null);
             })
             .catch(err => {
                 if (err.name !== 'AbortError') {
