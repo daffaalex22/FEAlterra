@@ -15,8 +15,8 @@ const News = () => {
     //     { title: 'How Taylor Swift’s 10-minute “All Too Well” surpasses her original', subtitle: 'Taylor Swift has been teasing a 10-minute version of one of her old songs for years. It’s finally here.', author: 'Constance Grady', id: 7 }
     // ])
 
-    // const [data, setData] = useState(null)
-    // const [error, setError] = useState(null);
+    const [data, setData] = useState(null)
+    const [error, setError] = useState(null);
 
     // useEffect(() => {
     //     fetch("http://localhost:8000/news")
@@ -49,7 +49,7 @@ const News = () => {
         request.addEventListener('readystatechange', () => {
             if (request.readyState === 4 && request.status === 200) {
                 const data = JSON.parse(request.responseText);
-                setData2(data.slice(0, 11))
+                setData(data.slice(0, 7));
             } else if (request.readyState === 4) {
                 console.log("Failed to get the data");
             }
@@ -61,29 +61,27 @@ const News = () => {
 
     getNews();
 
-    // useEffect(() => {
-    //     fetch("https://newsapi.org/v2/top-headlines?country=id&apiKey=5a7c7c2996ec4aa6be06aba77055aa89")
-    //         .then(res => {
-    //             if (!res.ok) {
-    //                 throw Error('could not fetch the data for that resource');
-    //             }
-    //             return res.json();
-    //         })
-    //         .then(data => {
-    //             setData2(data);
-    //             setError2(null);
-    //         })
-    //         .catch(err => {
-    //             if (err.name !== 'AbortError') {
-    //                 setError2(err.message);
-    //             }
-    //             else {
-    //                 console.log('Fetch Aborted')
-    //             }
-    //         })
-    // }, [])
-
-
+    useEffect(() => {
+        fetch("https://newsapi.org/v2/top-headlines?country=id&apiKey=5a7c7c2996ec4aa6be06aba77055aa89")
+            .then(res => {
+                if (!res.ok) {
+                    throw Error('could not fetch the data for that resource');
+                }
+                return res.json();
+            })
+            .then(data => {
+                setData2(data);
+                setError2(null);
+            })
+            .catch(err => {
+                if (err.name !== 'AbortError') {
+                    setError2(err.message);
+                }
+                else {
+                    console.log('Fetch Aborted')
+                }
+            })
+    }, [])
 
     return (
         <div className="news">
@@ -94,7 +92,7 @@ const News = () => {
                     Top Stories
                 </h1>
 
-                {/* {data &&
+                {data &&
                     <div className="d-flex news-list mt-5">
                         {data.map(news => (
                             <div className={`news-preview square-${news.id}`} key={news.id} >
@@ -102,22 +100,22 @@ const News = () => {
                                     className='text-black text-decoration-none'
                                     to={`/news/${news.id}`}
                                 >
-                                    <h2>{news.title}</h2>
+                                    <h2>{news.name}</h2>
                                 </Link>
-                                <h4>{news.subtitle}</h4>
-                                <p>By <author>{news.author}</author></p>
+                                <h4>{news.body}</h4>
+                                <p>By <author>{news.email}</author></p>
                             </div>
                         ))}
                     </div>
-                } */}
+                }
 
                 {data2 &&
                     <div className="indo-news">
-                        {data2.map(news => (
+                        {data2.articles.map(news => (
                             <div className="news-indo-preview">
-                                <h2>{news.name}</h2>
-                                <h4>{news.body}</h4>
-                                <p>By {news.email}</p>
+                                <h2>{news.title}</h2>
+                                <h4>{news.description}</h4>
+                                <p>By {news.author}</p>
                                 <br />
                             </div>
                         ))
@@ -125,9 +123,6 @@ const News = () => {
                     </div>
                 }
 
-                {!data2 &&
-                    <h1>{error2}</h1>
-                }
             </div>
         </div>
     );
