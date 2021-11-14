@@ -15,8 +15,8 @@ const News = () => {
     //     { title: 'How Taylor Swift’s 10-minute “All Too Well” surpasses her original', subtitle: 'Taylor Swift has been teasing a 10-minute version of one of her old songs for years. It’s finally here.', author: 'Constance Grady', id: 7 }
     // ])
 
-    const [data, setData] = useState(null)
-    const [error, setError] = useState(null);
+    // const [data, setData] = useState(null)
+    // const [error, setError] = useState(null);
 
     // useEffect(() => {
     //     fetch("http://localhost:8000/news")
@@ -74,7 +74,7 @@ const News = () => {
                     Top Stories
                 </h1>
 
-                {data &&
+                {/* {data &&
                     <div className="d-flex news-list mt-5">
                         {data.map(news => (
                             <div className={`news-preview square-${news.id}`} key={news.id} >
@@ -89,7 +89,7 @@ const News = () => {
                             </div>
                         ))}
                     </div>
-                }
+                } */}
 
                 {data2 &&
                     <div className="indo-news">
