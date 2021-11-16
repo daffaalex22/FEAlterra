@@ -3,14 +3,27 @@ import PassengerInput from './PassengerInput';
 import ListPassenger from './ListPassenger';
 import Header from './Header';
 import { useState, useEffect } from "react";
-import { gql, useLazyQuery, useQuery } from '@apollo/client'
+import { gql, useLazyQuery, useQuery, useMutation } from '@apollo/client'
 
 
 const Home = () => {
+    const INSERT_PENGUNJUNG = gql`mutation MyMutation($jenis_kelamin: String!, $nama: String!, $umur: Int!) {
+        insert_anggota(objects: {umur: $umur, nama: $nama, jenis_kelamin: $jenis_kelamin}) {
+          affected_rows
+        }
+      }`
 
-    const [pengunjung, setPengunjung] = useState([]);
-    const [input, setInput] = useState(0)
+    const DELETE_PENGUNGJUNG_BY_ID = gql`mutation HapusPengunjung($id: Int!) {
+        delete_anggota_by_pk(id: $id) {
+          id
+        }
+      }`
 
+    const EDIT_PENGUNGJUNG = gql`mutation EditPengunjung($_eq: Int = 9, $nama: String!, $jenis_kelamin: String!, $umur: Int!) {
+        update_anggota(where: {id: {_eq: $_eq}}, _set: {jenis_kelamin: $jenis_kelamin, nama: $nama, umur: $umur}) {
+          affected_rows
+        }
+      }`
 
     const GET_DATA = gql`
     query MyQuery {
@@ -40,15 +53,21 @@ const Home = () => {
 
     const { loading: allLoading, error: allError, data: allData } = useQuery(GET_DATA);
     const [getById, { loading: singleLoading, error: singleError, data: singleData }] = useLazyQuery(GET_DATA_BYID, variables);
+    const [insertAnggota, { data: insertData, loading: insertLoading, error: insertError }] = useMutation(INSERT_PENGUNJUNG, { refetchQueries: [GET_DATA] })
+    const [deleteAnggotaById, { data: deleteData, loading: deleteLoading, error: deleteError }] = useMutation(DELETE_PENGUNGJUNG_BY_ID, { refetchQueries: [GET_DATA] });
+    const [editPengunjung, { data: editData, loading: editLoading, error: editError }] = useMutation(EDIT_PENGUNGJUNG, { refetchQueries: [GET_DATA] });
+
+    const [pengunjung, setPengunjung] = useState([]);
+    const [input, setInput] = useState(0);
+
+    const [isEditing, setIsEditing] = useState(false);
+    const [editID, setEditID] = useState(0);
 
     useEffect(() => {
         if (allData) {
             setPengunjung(allData.anggota)
         }
     }, [allData])
-
-    // setPengunjung(allData?.anggota);
-    console.log("Sesuatu aja");
 
     useEffect(() => {
         if (singleData) {
@@ -73,25 +92,50 @@ const Home = () => {
         return `Error! ${singleError.message}`;
     }
 
+    if (insertLoading) {
+        return 'Loading...';
+    }
+
+    if (insertError) {
+        return `Error! ${insertError.message}`;
+    }
+
+    if (deleteLoading) {
+        return 'Loading...';
+    }
+
+    if (deleteError) {
+        return `Error! ${deleteError.message}`;
+    }
+
+    if (editLoading) {
+        return 'Loading...';
+    }
+
+    if (editError) {
+        return `Error! ${editError.message}`;
+    }
+
     const hapusPengunjung = id => {
-        setPengunjung((prevState) => (
-            [...prevState.filter(item => {
-                return item.id !== id;
-            })]
-        ))
+        let deleteVar = {
+            variables: {
+                "id": id
+            }
+        }
+        deleteAnggotaById(deleteVar);
     };
 
     const tambahPengunjung = newUser => {
-        const newData = {
-            id: uuidv4(),
-            ...newUser
-        };
-        setPengunjung((prevState) => (
-            [...prevState, newData]
-        ))
+        insertAnggota({ variables: newUser })
     };
 
-    const handleChange = (e) => {
+    const ubahPengunjung = editData => {
+        editPengunjung({ variables: editData });
+        setIsEditing(false)
+        setEditID(0)
+    };
+
+    const handleChangeId = (e) => {
         setVariables((prevState) => ({
             ...prevState,
             variables: {
@@ -101,7 +145,7 @@ const Home = () => {
         setInput(e.target.value)
     }
 
-    const handleSubmit = (e) => {
+    const handleSearchById = (e) => {
         e.preventDefault()
         if (input) {
             getById(variables)
@@ -113,103 +157,48 @@ const Home = () => {
         setPengunjung(allData.anggota)
     }
 
+    const handleEdit = (id) => {
+        setIsEditing(true);
+        setEditID(id);
+    }
+
     return (
         <div>
             <Header />
             <form>
-                <input type="number" name="_id" onChange={handleChange} />
-                <button type="submit" onClick={handleSubmit}>Search by Id</button>
-                <button type="submit" onClick={handleGetAll}>Show All</button>
+                <input
+                    type="number"
+                    name="_id"
+                    onChange={handleChangeId}
+                />
+                <button
+                    type="submit"
+                    onClick={handleSearchById}
+                >
+                    Search by Id
+                </button>
+                <button
+                    type="submit"
+                    onClick={handleGetAll}
+                >
+                    Show All
+                </button>
             </form>
             <br />
             <ListPassenger
                 data={pengunjung}
                 hapusPengunjung={hapusPengunjung}
+                editPengunjung={handleEdit}
             />
             <PassengerInput
                 tambahPengunjung={tambahPengunjung}
+                editPengunjung={ubahPengunjung}
+                editID={editID}
+                isEditing={isEditing}
+                pengunjung={pengunjung}
             />
         </div>
     );
 }
 
 export default Home;
-
-
-// class Home extends Component {
-//     constructor(props) {
-//         super(props)
-//         this.state = {
-//             data : [
-//                 {
-//                     id: uuidv4(),
-//                     nama: 'Yoga',
-//                     umur: 22,
-//                     jenisKelamin: 'Pria'
-//                 },
-//                 {
-//                     id: uuidv4(),
-//                     nama: 'Ria',
-//                     umur: 19,
-//                     jenisKelamin: 'Wanita'
-//                 },
-//                 {
-//                     id: uuidv4(),
-//                     nama: 'Fahmi',
-//                     umur: 25,
-//                     jenisKelamin: 'Pria'
-//                 },
-//                 {
-//                     id: uuidv4(),
-//                     nama: 'Lala',
-//                     umur: 21,
-//                     jenisKelamin: 'Wanita'
-//                 },
-//                 {
-//                     id: uuidv4(),
-//                     nama: 'Ivan',
-//                     umur: 25,
-//                     jenisKelamin: 'Pria'
-//                 }
-//             ]
-
-//         }
-//     }
-
-//     hapusPengunjung = id => {
-//         this.setState({    
-//             data: [      
-//                 ...this.state.data.filter(item => {        
-//                     return item.id !== id;      
-//                 })    
-//             ]  
-//         });
-//     };
-
-//     tambahPengunjung = newUser => {
-//         const newData = {
-//             id: uuidv4(),
-//             ...newUser
-//         }; 
-//         this.setState({    
-//             data: [...this.state.data, newData]  
-//         });
-//     };
-
-//     render() {
-//         return (
-//             <div>
-//                 <Header/>
-//                 <ListPassenger 
-//                     data={this.state.data}
-//                     hapusPengunjung={this.hapusPengunjung}
-//                 />
-//                 <PassengerInput
-//                     tambahPengunjung={this.tambahPengunjung}
-//                 />
-//             </div>
-//         )
-//     }
-// }
-
-// export default Home;
