@@ -3,36 +3,11 @@ import PassengerInput from './PassengerInput';
 import ListPassenger from './ListPassenger';
 import Header from './Header';
 import { useState, useEffect } from "react";
-import { gql, useLazyQuery, useQuery, useMutation } from '@apollo/client'
+import { useQuery, useMutation } from '@apollo/client'
+import { INSERT_PENGUNJUNG, DELETE_PENGUNGJUNG_BY_ID, EDIT_PENGUNGJUNG, GET_ANGGOTAS } from '../queries'
 
 
 const Home = () => {
-    const INSERT_PENGUNJUNG = gql`mutation MyMutation($jenis_kelamin: String!, $nama: String!, $umur: Int!) {
-        insert_anggota(objects: {umur: $umur, nama: $nama, jenis_kelamin: $jenis_kelamin}) {
-          affected_rows
-        }
-      }`
-
-    const DELETE_PENGUNGJUNG_BY_ID = gql`mutation HapusPengunjung($id: Int!) {
-        delete_anggota_by_pk(id: $id) {
-          id
-        }
-      }`
-
-    const EDIT_PENGUNGJUNG = gql`mutation EditPengunjung($_eq: Int = 9, $nama: String!, $jenis_kelamin: String!, $umur: Int!) {
-        update_anggota(where: {id: {_eq: $_eq}}, _set: {jenis_kelamin: $jenis_kelamin, nama: $nama, umur: $umur}) {
-          affected_rows
-        }
-      }`
-
-    const GET_ANGGOTAS = gql`query MyQuery($id: Int_comparison_exp = {}) {
-        anggota(where: {id: $id}) {
-          id
-          nama
-          umur
-          jenis_kelamin
-        }
-      }`
 
     const [variables, setVariables] = useState({
         variables: {
@@ -53,7 +28,7 @@ const Home = () => {
             loading: insertLoading,
             error: insertError
         }
-    ] = useMutation(INSERT_PENGUNJUNG, { refetchQueries: [GET_DATA] })
+    ] = useMutation(INSERT_PENGUNJUNG, { refetchQueries: [GET_ANGGOTAS] })
 
     const [
         deleteAnggotaById, {
@@ -61,7 +36,7 @@ const Home = () => {
             loading: deleteLoading,
             error: deleteError
         }
-    ] = useMutation(DELETE_PENGUNGJUNG_BY_ID, { refetchQueries: [GET_DATA] });
+    ] = useMutation(DELETE_PENGUNGJUNG_BY_ID, { refetchQueries: [GET_ANGGOTAS] });
 
     const [
         editPengunjung, {
@@ -69,7 +44,7 @@ const Home = () => {
             loading: editLoading,
             error: editError
         }
-    ] = useMutation(EDIT_PENGUNGJUNG, { refetchQueries: [GET_DATA] });
+    ] = useMutation(EDIT_PENGUNGJUNG, { refetchQueries: [GET_ANGGOTAS] });
 
     const [pengunjung, setPengunjung] = useState([]);
     const [input, setInput] = useState(0);
