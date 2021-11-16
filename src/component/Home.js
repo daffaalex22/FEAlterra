@@ -25,19 +25,9 @@ const Home = () => {
         }
       }`
 
-    const GET_DATA = gql`
-    query MyQuery {
-        anggota {
+    const GET_ANGGOTAS = gql`query MyQuery($id: Int_comparison_exp = {}) {
+        anggota(where: {id: $id}) {
           id
-          nama
-          umur
-          jenis_kelamin
-        }
-      }`
-
-    const GET_DATA_BYID = gql`
-    query MyQuery($_id: Int!) {
-        anggota(where: {id: {_eq: $_id}}) {
           nama
           umur
           jenis_kelamin
@@ -46,16 +36,40 @@ const Home = () => {
 
     const [variables, setVariables] = useState({
         variables: {
-            "_id": 1
+            "id": {}
         }
     })
 
+    const {
+        loading: allLoading,
+        error: allError,
+        data: allData,
+        refetch: refetchAll
+    } = useQuery(GET_ANGGOTAS, variables);
 
-    const { loading: allLoading, error: allError, data: allData } = useQuery(GET_DATA);
-    const [getById, { loading: singleLoading, error: singleError, data: singleData }] = useLazyQuery(GET_DATA_BYID, variables);
-    const [insertAnggota, { data: insertData, loading: insertLoading, error: insertError }] = useMutation(INSERT_PENGUNJUNG, { refetchQueries: [GET_DATA] })
-    const [deleteAnggotaById, { data: deleteData, loading: deleteLoading, error: deleteError }] = useMutation(DELETE_PENGUNGJUNG_BY_ID, { refetchQueries: [GET_DATA] });
-    const [editPengunjung, { data: editData, loading: editLoading, error: editError }] = useMutation(EDIT_PENGUNGJUNG, { refetchQueries: [GET_DATA] });
+    const [
+        insertAnggota, {
+            data: insertData,
+            loading: insertLoading,
+            error: insertError
+        }
+    ] = useMutation(INSERT_PENGUNJUNG, { refetchQueries: [GET_DATA] })
+
+    const [
+        deleteAnggotaById, {
+            data: deleteData,
+            loading: deleteLoading,
+            error: deleteError
+        }
+    ] = useMutation(DELETE_PENGUNGJUNG_BY_ID, { refetchQueries: [GET_DATA] });
+
+    const [
+        editPengunjung, {
+            data: editData,
+            loading: editLoading,
+            error: editError
+        }
+    ] = useMutation(EDIT_PENGUNGJUNG, { refetchQueries: [GET_DATA] });
 
     const [pengunjung, setPengunjung] = useState([]);
     const [input, setInput] = useState(0);
@@ -69,27 +83,12 @@ const Home = () => {
         }
     }, [allData])
 
-    useEffect(() => {
-        if (singleData) {
-            setPengunjung(singleData.anggota)
-        }
-    }, [singleData])
-
-
     if (allLoading) {
         return 'Loading...';
     }
 
     if (allError) {
         return `Error! ${allError.message}`;
-    }
-
-    if (singleLoading) {
-        return 'Loading...';
-    }
-
-    if (singleError) {
-        return `Error! ${singleError.message}`;
     }
 
     if (insertLoading) {
@@ -136,25 +135,31 @@ const Home = () => {
     };
 
     const handleChangeId = (e) => {
-        setVariables((prevState) => ({
-            ...prevState,
-            variables: {
-                "_id": e.target.value
-            }
-        }))
         setInput(e.target.value)
     }
 
     const handleSearchById = (e) => {
         e.preventDefault()
         if (input) {
-            getById(variables)
+            setVariables((prevState) => ({
+                ...prevState,
+                variables: {
+                    "id": {
+                        "_eq": input
+                    }
+                }
+            }))
         }
     }
 
     const handleGetAll = (e) => {
         e.preventDefault()
-        setPengunjung(allData.anggota)
+        setVariables((prevState) => ({
+            ...prevState,
+            variables: {
+                "id": {}
+            }
+        }))
     }
 
     const handleEdit = (id) => {
