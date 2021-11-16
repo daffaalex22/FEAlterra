@@ -3,11 +3,28 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+} from "@apollo/client";
+
+const client = new ApolloClient({
+  uri: 'https://fleet-glider-91.hasura.app/v1/graphql',
+  cache: new InMemoryCache(),
+  headers: {
+    "content-type": "application/json",
+    "x-hasura-admin-secret": "1Vi3QzTHMEFZaPiJMgBvm5zlmMkBjpX9K1HWvzHfJnHrO9PY1o3TO2Vdllf19Rxw"
+  }
+});
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+    <ApolloProvider client={client}>
+      <App />
+    </ApolloProvider>
+  </React.StrictMode>
+  ,
   document.getElementById('root')
 );
 
