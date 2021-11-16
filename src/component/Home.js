@@ -9,6 +9,7 @@ import { gql, useLazyQuery, useQuery } from '@apollo/client'
 const Home = () => {
 
     const [pengunjung, setPengunjung] = useState([]);
+    const [input, setInput] = useState(0)
 
 
     const GET_DATA = gql`
@@ -36,7 +37,6 @@ const Home = () => {
         }
     })
 
-    // var allData = null
 
     const { loading: allLoading, error: allError, data: allData } = useQuery(GET_DATA);
     const [getById, { loading: singleLoading, error: singleError, data: singleData }] = useLazyQuery(GET_DATA_BYID, variables);
@@ -46,6 +46,9 @@ const Home = () => {
             setPengunjung(allData.anggota)
         }
     }, [allData])
+
+    // setPengunjung(allData?.anggota);
+    console.log("Sesuatu aja");
 
     useEffect(() => {
         if (singleData) {
@@ -60,6 +63,14 @@ const Home = () => {
 
     if (allError) {
         return `Error! ${allError.message}`;
+    }
+
+    if (singleLoading) {
+        return 'Loading...';
+    }
+
+    if (singleError) {
+        return `Error! ${singleError.message}`;
     }
 
     const hapusPengunjung = id => {
@@ -87,11 +98,19 @@ const Home = () => {
                 "_id": e.target.value
             }
         }))
+        setInput(e.target.value)
     }
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        getById(variables)
+        if (input) {
+            getById(variables)
+        }
+    }
+
+    const handleGetAll = (e) => {
+        e.preventDefault()
+        setPengunjung(allData.anggota)
     }
 
     return (
@@ -100,6 +119,7 @@ const Home = () => {
             <form>
                 <input type="number" name="_id" onChange={handleChange} />
                 <button type="submit" onClick={handleSubmit}>Search by Id</button>
+                <button type="submit" onClick={handleGetAll}>Show All</button>
             </form>
             <br />
             <ListPassenger
