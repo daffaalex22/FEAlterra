@@ -6,7 +6,6 @@ import { useState, useEffect } from "react";
 import { useQuery, useMutation, useSubscription } from '@apollo/client'
 import { INSERT_PENGUNJUNG, DELETE_PENGUNGJUNG_BY_ID, EDIT_PENGUNGJUNG, GET_ANGGOTAS, SUBSCRIBE_PENGUNJUNG } from '../queries'
 import Loading from "./Loading";
-import errorHandler from "./errorHandle";
 
 
 const Home = () => {
