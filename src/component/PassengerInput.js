@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react"
 import "./Home.css"
-import { gql, useLazyQuery, useQuery, useMutation } from '@apollo/client'
 
 function PassengerInput(props) {
   const [state, setState] = useState({
@@ -15,7 +14,7 @@ function PassengerInput(props) {
       const editData = props.pengunjung.find((item) => item.id === props.editID)
       setState(editData)
     }
-  }, [props.isEditing, props.editID])
+  }, [props.isEditing, props.editID, props.pengunjung])
 
   const onChange = (e) => {
     setState({
@@ -76,9 +75,12 @@ function PassengerInput(props) {
 
   const handleTutupInput = () => {
     setState({
-      ...state,
+      nama: "",
+      umur: "",
+      jenis_kelamin: "Pria",
       editing: true,
     })
+    props.closeForm()
   }
 
   let viewMode = {}
@@ -134,7 +136,7 @@ function PassengerInput(props) {
         <button
           onClick={handleSubmit}
         >
-          {props.isEditing ? "Edit Pelanggan" : "Submit"}
+          {props.isEditing && state.nama.trim() && state.umur && state.jenis_kelamin ? "Edit Pelanggan" : "Submit"}
         </button>
         <button
           onClick={handleTutupInput}

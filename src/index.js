@@ -3,20 +3,53 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { WebSocketLink } from '@apollo/client/link/ws';
+import { split, HttpLink } from '@apollo/client';
+import { getMainDefinition } from '@apollo/client/utilities';
 import {
   ApolloClient,
   InMemoryCache,
   ApolloProvider,
 } from "@apollo/client";
 
-const client = new ApolloClient({
+const httpLink = new HttpLink({
   uri: 'https://fleet-glider-91.hasura.app/v1/graphql',
-  cache: new InMemoryCache(),
   headers: {
     "content-type": "application/json",
     "x-hasura-admin-secret": "1Vi3QzTHMEFZaPiJMgBvm5zlmMkBjpX9K1HWvzHfJnHrO9PY1o3TO2Vdllf19Rxw"
   }
 });
+
+const wsLink = new WebSocketLink({
+  uri: 'wss://fleet-glider-91.hasura.app/v1/graphql',
+  options: {
+    reconnect: true,
+    connectionParams: {
+      headers: {
+        "content-type": "application/json",
+        "x-hasura-admin-secret": "1Vi3QzTHMEFZaPiJMgBvm5zlmMkBjpX9K1HWvzHfJnHrO9PY1o3TO2Vdllf19Rxw"
+      }
+    }
+  }
+});
+
+const splitLink = split(
+  ({ query }) => {
+    const definition = getMainDefinition(query);
+    return (
+      definition.kind === 'OperationDefinition' &&
+      definition.operation === 'subscription'
+    );
+  },
+  wsLink,
+  httpLink,
+);
+
+const client = new ApolloClient({
+  cache: new InMemoryCache(),
+  link: splitLink
+});
+
 
 ReactDOM.render(
   <React.StrictMode>

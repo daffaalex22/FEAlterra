@@ -3,8 +3,10 @@ import PassengerInput from './PassengerInput';
 import ListPassenger from './ListPassenger';
 import Header from './Header';
 import { useState, useEffect } from "react";
-import { useQuery, useMutation } from '@apollo/client'
-import { INSERT_PENGUNJUNG, DELETE_PENGUNGJUNG_BY_ID, EDIT_PENGUNGJUNG, GET_ANGGOTAS } from '../queries'
+import { useQuery, useMutation, useSubscription } from '@apollo/client'
+import { INSERT_PENGUNJUNG, DELETE_PENGUNGJUNG_BY_ID, EDIT_PENGUNGJUNG, GET_ANGGOTAS, SUBSCRIBE_PENGUNJUNG } from '../queries'
+import isItLoading from "./handleLoading";
+import Loading from "./Loading";
 
 
 const Home = () => {
@@ -15,12 +17,21 @@ const Home = () => {
         }
     })
 
+    const [loadings, setLoadings] = useState({})
+    const [isLoading, setIsLoading] = useState(false)
+
     const {
-        loading: allLoading,
-        error: allError,
-        data: allData,
-        refetch: refetchAll
-    } = useQuery(GET_ANGGOTAS, variables);
+        data: subsData,
+        loading: subsLoading,
+        error: subsError
+    } = useSubscription(SUBSCRIBE_PENGUNJUNG, variables);
+
+    // const {
+    //     loading: allLoading,
+    //     error: allError,
+    //     data: allData,
+    //     refetch: refetchAll
+    // } = useQuery(GET_ANGGOTAS, variables);
 
     const [
         insertAnggota, {
@@ -28,7 +39,7 @@ const Home = () => {
             loading: insertLoading,
             error: insertError
         }
-    ] = useMutation(INSERT_PENGUNJUNG, { refetchQueries: [GET_ANGGOTAS] })
+    ] = useMutation(INSERT_PENGUNJUNG)
 
     const [
         deleteAnggotaById, {
@@ -36,7 +47,7 @@ const Home = () => {
             loading: deleteLoading,
             error: deleteError
         }
-    ] = useMutation(DELETE_PENGUNGJUNG_BY_ID, { refetchQueries: [GET_ANGGOTAS] });
+    ] = useMutation(DELETE_PENGUNGJUNG_BY_ID);
 
     const [
         editPengunjung, {
@@ -44,7 +55,7 @@ const Home = () => {
             loading: editLoading,
             error: editError
         }
-    ] = useMutation(EDIT_PENGUNGJUNG, { refetchQueries: [GET_ANGGOTAS] });
+    ] = useMutation(EDIT_PENGUNGJUNG);
 
     const [pengunjung, setPengunjung] = useState([]);
     const [input, setInput] = useState(0);
@@ -52,43 +63,73 @@ const Home = () => {
     const [isEditing, setIsEditing] = useState(false);
     const [editID, setEditID] = useState(0);
 
+    // useEffect(() => {
+    //     if (allData) {
+    //         setPengunjung(allData.anggota)
+    //     }
+    // }, [allData])
+
     useEffect(() => {
-        if (allData) {
-            setPengunjung(allData.anggota)
+        if (subsData) {
+            setPengunjung(subsData.anggota)
         }
-    }, [allData])
+    }, [subsData])
 
-    if (allLoading) {
-        return 'Loading...';
+    useEffect(() => {
+        setLoadings((prevState) => ({
+            ...prevState,
+            subsLoading: subsLoading,
+            insertLoading: insertLoading,
+            editLoading: editLoading,
+            deleteLoading: deleteLoading
+        }));
+    }, [subsLoading, insertLoading, editLoading, deleteLoading])
+
+    // useEffect(() => {
+    //     isItLoading(loadings)
+    // }, [loadings])
+
+    // if (subsLoading) {
+    //     return 'Loading...';
+    // }
+
+    if (subsError) {
+        return `Error! ${subsError.message}`;
     }
 
-    if (allError) {
-        return `Error! ${allError.message}`;
-    }
+    // if (allLoading) {
+    //     return 'Loading...';
+    // }
 
-    if (insertLoading) {
-        return 'Loading...';
-    }
+    // if (allError) {
+    //     return `Error! ${allError.message}`;
+    // }
+
+    // if (insertLoading) {
+    //     return 'Loading...';
+    // }
 
     if (insertError) {
         return `Error! ${insertError.message}`;
     }
 
-    if (deleteLoading) {
-        return 'Loading...';
-    }
+    // if (deleteLoading) {
+    //     return 'Loading...';
+    // }
 
     if (deleteError) {
         return `Error! ${deleteError.message}`;
     }
 
-    if (editLoading) {
-        return 'Loading...';
-    }
+    // if (editLoading) {
+    //     return 'Loading...';
+    // }
 
     if (editError) {
         return `Error! ${editError.message}`;
     }
+
+
 
     const hapusPengunjung = id => {
         let deleteVar = {
@@ -142,6 +183,10 @@ const Home = () => {
         setEditID(id);
     }
 
+    const closeForm = () => {
+        setIsEditing(false)
+    }
+
     return (
         <div>
             <Header />
@@ -176,7 +221,9 @@ const Home = () => {
                 editID={editID}
                 isEditing={isEditing}
                 pengunjung={pengunjung}
+                closeForm={closeForm}
             />
+            {isItLoading(loadings) && <Loading />}
         </div>
     );
 }
