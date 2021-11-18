@@ -1,3 +1,11 @@
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 18%;
+}
+
+
 .lds-dual-ring {
     display: inline-block;
     width: 80px;
@@ -10,8 +18,8 @@
     height: 64px;
     margin: 8px;
     border-radius: 50%;
-    border: 6px solid #fdd;
-    border-color: #fdd transparent #fdd transparent;
+    border: 6px solid black;
+    border-color: gray transparent gray transparent;
     animation: lds-dual-ring 1.2s linear infinite;
   }
   @keyframes lds-dual-ring {

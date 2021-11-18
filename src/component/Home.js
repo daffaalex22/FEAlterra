@@ -5,8 +5,8 @@ import Header from './Header';
 import { useState, useEffect } from "react";
 import { useQuery, useMutation, useSubscription } from '@apollo/client'
 import { INSERT_PENGUNJUNG, DELETE_PENGUNGJUNG_BY_ID, EDIT_PENGUNGJUNG, GET_ANGGOTAS, SUBSCRIBE_PENGUNJUNG } from '../queries'
-import isItLoading from "./handleLoading";
 import Loading from "./Loading";
+import errorHandler from "./errorHandle";
 
 
 const Home = () => {
@@ -16,9 +16,6 @@ const Home = () => {
             "id": {}
         }
     })
-
-    const [loadings, setLoadings] = useState({})
-    const [isLoading, setIsLoading] = useState(false)
 
     const {
         data: subsData,
@@ -63,73 +60,31 @@ const Home = () => {
     const [isEditing, setIsEditing] = useState(false);
     const [editID, setEditID] = useState(0);
 
-    // useEffect(() => {
-    //     if (allData) {
-    //         setPengunjung(allData.anggota)
-    //     }
-    // }, [allData])
-
     useEffect(() => {
         if (subsData) {
             setPengunjung(subsData.anggota)
         }
     }, [subsData])
 
-    useEffect(() => {
-        setLoadings((prevState) => ({
-            ...prevState,
-            subsLoading: subsLoading,
-            insertLoading: insertLoading,
-            editLoading: editLoading,
-            deleteLoading: deleteLoading
-        }));
-    }, [subsLoading, insertLoading, editLoading, deleteLoading])
-
-    // useEffect(() => {
-    //     isItLoading(loadings)
-    // }, [loadings])
-
-    // if (subsLoading) {
-    //     return 'Loading...';
-    // }
+    if (subsLoading || insertLoading || editLoading || deleteLoading) {
+        return (<Loading />)
+    }
 
     if (subsError) {
         return `Error! ${subsError.message}`;
     }
 
-    // if (allLoading) {
-    //     return 'Loading...';
-    // }
-
-    // if (allError) {
-    //     return `Error! ${allError.message}`;
-    // }
-
-    // if (insertLoading) {
-    //     return 'Loading...';
-    // }
-
     if (insertError) {
         return `Error! ${insertError.message}`;
     }
-
-    // if (deleteLoading) {
-    //     return 'Loading...';
-    // }
 
     if (deleteError) {
         return `Error! ${deleteError.message}`;
     }
 
-    // if (editLoading) {
-    //     return 'Loading...';
-    // }
-
     if (editError) {
         return `Error! ${editError.message}`;
     }
-
-
 
     const hapusPengunjung = id => {
         let deleteVar = {
@@ -223,7 +178,6 @@ const Home = () => {
                 pengunjung={pengunjung}
                 closeForm={closeForm}
             />
-            {isItLoading(loadings) && <Loading />}
         </div>
     );
 }

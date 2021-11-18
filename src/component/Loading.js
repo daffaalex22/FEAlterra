@@ -2,7 +2,9 @@ import './Loading.css'
 
 const Loading = () => {
     return (
-        <div class="lds-dual-ring"></div>
+        <div className="loading">
+            <div className="lds-dual-ring"></div>
+        </div>
     );
 }
 
